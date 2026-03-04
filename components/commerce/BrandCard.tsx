@@ -1,12 +1,12 @@
 "use client"
 
-import Image from "next/image"
+import Image, { ImageProps } from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { hoverImageZoom } from "@/lib/motion/presets"
 import clsx from "clsx"
 import React from "react"
-
+const isDev = process.env.NODE_ENV === "development"
 type BrandCardProps = {
   name: string
   image: string
@@ -50,6 +50,7 @@ export function BrandCard({
   priority = false,
   className,
 }: BrandCardProps) {
+  const isDev = process.env.NODE_ENV === "development"
   // -------------------------
   // editorial aspect ratios
   // -------------------------
@@ -72,13 +73,13 @@ export function BrandCard({
         ======================== */}
         <div
           className={clsx(
-            "relative overflow-hidden rounded-2xl",
+            "overflow-hidden rounded-2xl",
             aspectClass
           )}
         >
           <motion.div
             {...hoverImageZoom}
-            className="h-full w-full"
+            className="relative h-full w-full"
           >
             <Image
               src={image}
@@ -87,6 +88,7 @@ export function BrandCard({
               priority={priority}
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
+              unoptimized={isDev}
             />
           </motion.div>
         </div>

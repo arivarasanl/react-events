@@ -1,81 +1,90 @@
-import { Section } from "@/components/layout/Section"
-import { Container } from "@/components/layout/Container"
-import { Grid } from "@/components/layout/Grid"
-import { BrandCard } from "@/components/commerce/BrandCard"
-import { ProductCard } from "@/components/commerce/ProductCard"
-import { Typography } from "@/components/ui/Typography"
 import { notFound } from "next/navigation"
+import CategoryHero from "./components/CategoryHero"
+import EditorialOverview from "./components/EditorialOverview"
+import ExploreBrands from "./components/ExploreBrands"
+import ExploreThemes from "./components/ExploreThemes"
+import ProductResults from "./components/ProductResults"
+import {
+  getCategoryBySlug,
+  getBrandsByCategory,
+  getThemesByCategory,
+  getProducts,
+} from "@/lib/api/categories"
+
 
 type PageProps = {
-  params?: {
-    slug?: string
-  }
+  params: Promise<{ slug: string }>
+  searchParams?: Promise<{
+    brand?: string
+    theme?: string
+    page?: string
+  }>
 }
 
-export default async function CategoryDetailPage({ params }: PageProps) {
-  
-  // ---- MOCK DATA (replace with Spree) ----
-  const category = {
-    name: "Jwellery",
-    description:
-      "A curated selection of contemporary and heritage designers in this category.",
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: PageProps) {
+  const { slug } = await params
+  const resolvedSearchParams = await searchParams
+
+  const brand = resolvedSearchParams?.brand
+  const theme = resolvedSearchParams?.theme
+  const page = Number(resolvedSearchParams?.page ?? 1)
+
+
+  // 🔹 Fetch category meta
+  const category = await getCategoryBySlug(slug)
+  if (!category) return notFound()
+
+  // 🔹 Fetch curated brands for this category
+  const brands = await getBrandsByCategory(slug)
+
+  // 🔹 Fetch curated themes
+  const themes = await getThemesByCategory(slug)
+
+  const showProducts = Boolean(brand || theme)
+
+  let products = null
+
+  if (showProducts) {
+    products = await getProducts({
+      category: slug,
+      brand,
+      theme,
+      page,
+      limit: 24,
+    })
   }
 
-  const brands = Array.from({ length: 6 }).map((_, i) => ({
-    id: i,
-    name: `Brand ${i + 1}`,
-    image: `https://picsum.photos/600/800?random=${i + 50}`,
-    href: `/brands/brand-${i + 1}`,
-  }))
-
-  const featuredProducts = Array.from({ length: 3 }).map((_, i) => ({
-    id: i,
-    name: `Featured Piece ${i + 1}`,
-    brand: brands[i % brands.length].name,
-    image: `https://picsum.photos/600/800?random=${i + 90}`,
-    href: "#",
-  }))
-
   return (
-    <Section>
-      <Container size="wide">
-        {/* ========================
-            CATEGORY HEADER
-        ======================== */}
-        <div className="mb-space-12 max-w-2xl">
-          <Typography as="h1">{category.name}</Typography>
-          <p className="mt-space-4 text-neutral-600 leading-relaxed">
-            {category.description}
-          </p>
-        </div>
+    <main>
 
-        {/* ========================
-            BRANDS (PRIMARY)
-        ======================== */}
-          <Grid columns={3} gap="loose">
-            {brands.map((brand) => (
-              <BrandCard key={brand.id} {...brand} />
-            ))}
-          </Grid>
+      {/* 1️⃣ Hero */}
+      <CategoryHero category={category} />
 
-        {/* ========================
-            FEATURED PRODUCTS
-            (SECONDARY, EDITORIAL)
-        ======================== */}
-        {featuredProducts.length > 0 && (
-          <div className="mt-space-20">
-            <p className="text-xs uppercase tracking-wider text-neutral-500 mb-space-6">
-              Editor’s Picks
-            </p>
+      {/* 2️⃣ Editorial Overview */}
+      <EditorialOverview category={category} />
 
-            <Grid columns={3} gap="normal">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} {...product} />
-              ))}
-            </Grid>
-          </div>
-        )}
-      </Container>
-    </Section>
+      {/* 3️⃣ Explore by Brand */}
+      {!showProducts && (
+        <ExploreBrands slug={slug} brands={brands} />
+      )}
+
+      {/* 4️⃣ Explore by Theme */}
+      {!showProducts && themes.length > 0 && (
+        <ExploreThemes slug={slug} themes={themes} />
+      )}
+
+      {/* 5️⃣ Products (Conditional) */}
+      {showProducts && (
+        <ProductResults
+          slug={slug}
+          products={products}
+          page={page}
+        />
+      )}
+
+    </main>
   )
 }

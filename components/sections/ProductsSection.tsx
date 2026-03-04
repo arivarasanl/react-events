@@ -1,5 +1,6 @@
 import { HomepageResponse } from "@/types/homepage"
 import { Section } from "@/components/layout/Section"
+import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { Grid } from "@/components/layout/Grid"
 import { ProductCard } from "@/components/commerce/ProductCard"
@@ -10,22 +11,24 @@ interface ProductsSectionProps {
 
 export default function ProductsSection({ items }: ProductsSectionProps) {
     return (
-        <Section>
-            <Container>
-                <h2 className="font-serif text-3xl md:text-4xl mb-10">
-                    Collections
-                </h2>
+        <Section variant="default">
+            <Container size="wide">
+                <SectionTitle className="mb-14">
+                  Collections
+                </SectionTitle>
 
-                <Grid columns={3}>
-                    {items.map((product) => (
+                <Grid className="grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
+                    {items.map((product, index) => (
                         <ProductCard
-                            key={product.id}
-                            id={product.id}
-                            name={product.name}
-                            brand="Crafted Studio" // Mock brand name as it's not in Product response but used in page.tsx
-                            price={parseFloat(product.price.replace(/[^0-9.-]+/g, "")) || 0}
-                            image={product.image_url}
-                            href={`/product/${product.slug}`}
+                        key={product.id}
+                        name={product.name}
+                        brand={product.brand}
+                        image={product.image_url}
+                        price={product.price}
+                        href={`/product/${product.slug}`}
+                        aspect={(index === 0)||(index === 3)  ? "portrait" : "square"}
+                        aspect={"portrait"}
+                        className={(index === 0)||(index === 3) ? "md:col-span-2 md:row-span-2" : ""}
                         />
                     ))}
                 </Grid>

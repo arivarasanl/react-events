@@ -1,35 +1,35 @@
 import { HomepageResponse } from "@/types/homepage"
 import { Section } from "@/components/layout/Section"
+import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
-import { Grid } from "@/components/layout/Grid"
-import { ImageCard } from "@/components/media/ImageCard"
+import { EditorialGrid } from "@/components/layout/EditorialGrid"
+import { CategoryCard } from "@/components/commerce/CategoryCard"
 
-interface CategoriesSectionProps {
-  items: HomepageResponse["categories"]
-}
-
-export default function CategoriesSection({ items }: CategoriesSectionProps) {
+export default function CategoriesSection({ items }) {
   return (
-    <Section>
+    <Section variant="default">
       <Container>
-        <h2 className="font-serif text-3xl md:text-4xl mb-10">
+
+        <SectionTitle className="mb-14">
           Explore
-        </h2>
+        </SectionTitle>
 
         <Reveal>
-          <Grid>
+          <EditorialGrid className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
             {items.map((item) => (
-              <ImageCard 
-                key={item.id} 
-                id={item.id}
+              <CategoryCard
+                key={item.id}
                 title={item.name}
                 image={item.image_url}
                 href={`/category/${item.slug}`}
               />
             ))}
-          </Grid>
+
+          </EditorialGrid>
         </Reveal>
+
       </Container>
     </Section>
   )

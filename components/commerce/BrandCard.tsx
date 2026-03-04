@@ -1,120 +1,80 @@
 "use client"
 
-import Image, { ImageProps } from "next/image"
+import { ImageTile } from "@/components/ui/ImageTile"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { hoverImageZoom } from "@/lib/motion/presets"
 import clsx from "clsx"
-import React from "react"
-const isDev = process.env.NODE_ENV === "development"
+
 type BrandCardProps = {
   name: string
   image: string
+  logo?: string
   href: string
-
-  /**
-   * Optional – allowed on landing only, NOT on index pages
-   */
   tagline?: string
-
-  /**
-   * Editorial layout style
-   * Default is portrait (fashion/editorial)
-   */
   aspect?: "portrait" | "square" | "landscape"
-
-  priority?: boolean
   className?: string
 }
 
-/*
-  Crafted BrandCard Philosophy
-
-  - campaign image dominates
-  - minimal typography
-  - emotional, not transactional
-  - no ecommerce UI
-  - feels like lookbook or poster
-
-  Index usage rules:
-  - always portrait
-  - no tagline
-*/
-
 export function BrandCard({
   name,
-  tagline,
   image,
+  logo,
   href,
+  tagline,
   aspect = "portrait",
-  priority = false,
   className,
 }: BrandCardProps) {
-  const isDev = process.env.NODE_ENV === "development"
-  // -------------------------
-  // editorial aspect ratios
-  // -------------------------
-  const aspectClass =
-    aspect === "square"
-      ? "aspect-square"
-      : aspect === "landscape"
-      ? "aspect-[4/3]"
-      : "aspect-[3/4]" // default fashion/editorial
-
   return (
     <Link
       href={href}
-      className={clsx("group block focus:outline-none", className)}
+      className={clsx("group block relative overflow-hidden rounded-2xl", className)}
     >
-      {/* Image + text should feel like ONE unit */}
-      <article className="space-y-4">
-        {/* ========================
-            Image
-        ======================== */}
-        <div
-          className={clsx(
-            "overflow-hidden rounded-2xl",
-            aspectClass
-          )}
-        >
-          <motion.div
-            {...hoverImageZoom}
-            className="relative h-full w-full"
-          >
-            <Image
-              src={image}
-              alt={name}
-              fill
-              priority={priority}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-              unoptimized={isDev}
-            />
-          </motion.div>
-        </div>
 
-        {/* ========================
-            Text
-        ======================== */}
-        <div className="space-y-1">
-          <h3
+      {/* Campaign image */}
+      <ImageTile
+        src={image}
+        alt={name}
+        aspect={aspect}
+      />
+
+      {/* Logo layer */}
+      {logo && false && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <img
+            src={logo}
+            alt={`${name} logo`}
             className="
-              font-serif
-              text-lg md:text-xl
-              leading-tight
-              tracking-tight
+              max-h-12
+              opacity-90
+              transition
+              duration-300
+              group-hover:scale-105
             "
-          >
-            {name}
-          </h3>
+          />
+        </div>
+      )}
+
+      {/* Hover info */}
+      <div
+        className="
+        absolute bottom-0 left-0 right-0
+        p-6
+        bg-gradient-to-t from-black/70 to-transparent
+        opacity-0
+        group-hover:opacity-100
+        transition
+        "
+      >
+        <div className="text-white">
+          <h3 className="font-serif text-lg">{name}</h3>
 
           {tagline && (
-            <p className="text-sm text-neutral-500 max-w-xs">
+            <p className="text-sm text-white/80">
               {tagline}
             </p>
           )}
         </div>
-      </article>
+      </div>
+
     </Link>
   )
 }

@@ -1,35 +1,52 @@
 import { HomepageResponse } from "@/types/homepage"
 import { Section } from "@/components/layout/Section"
+import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
-import { Grid } from "@/components/layout/Grid"
 
-interface SponsorsSectionProps {
-    items: HomepageResponse["sponsors"]
-}
+export default function SponsorsSection({ items }) {
+  return (
+    <Section variant="tight">
+      <Container size="default">
 
-export default function SponsorsSection({ items }: SponsorsSectionProps) {
-    return (
-        <Section spacing="tight">
-            <Container size="wide">
-                <h3 className="text-sm uppercase tracking-widest text-neutral-500 mb-8">
-                    Partners
-                </h3>
+        <SectionTitle align="center" className="mb-16">
+          Partners
+        </SectionTitle>
 
-                <Reveal>
-                    <Grid gap="loose" stagger="none">
-                        {items.map((s) => (
-                            <div
-                                key={s.id}
-                                className="text-center text-neutral-400 text-sm"
-                            >
-                                {/* The API had a typo 'bane', so I'll handle both just in case, or use 'bane' if it's the official field */}
-                                {(s as any).name || (s as any).bane}
-                            </div>
-                        ))}
-                    </Grid>
-                </Reveal>
-            </Container>
-        </Section>
-    )
+        <Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-12 gap-y-12 justify-items-center">
+
+            {items.map((s) => (
+              <a
+                key={s.id}
+                href={s.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center"
+              >
+                {s.logo_url ? (
+                  <img
+                    src={s.logo_url}
+                    alt={s.name}
+                    className="
+                      max-h-10 object-contain
+                      grayscale opacity-60
+                      hover:grayscale-0 hover:opacity-100
+                      transition-all duration-300
+                    "
+                  />
+                ) : (
+                  <span className="text-neutral-400 text-sm">
+                    {s.name || (s as any).bane}
+                  </span>
+                )}
+              </a>
+            ))}
+
+          </div>
+        </Reveal>
+
+      </Container>
+    </Section>
+  )
 }

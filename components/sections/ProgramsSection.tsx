@@ -10,7 +10,7 @@ interface ProgramsSectionProps {
 
 export default function ProgramsSection({ items }: ProgramsSectionProps) {
     return (
-        <Section tone="muted">
+        <Section variant="feature">
             <Container size="wide">
                 <div className="grid md:grid-cols-2 gap-16">
 

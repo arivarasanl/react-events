@@ -14,6 +14,7 @@ type Brand = {
   slug: string
   name: string
   image: string
+  logo: string
 }
 
 type Theme = {

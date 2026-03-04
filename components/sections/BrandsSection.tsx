@@ -1,34 +1,34 @@
 import { HomepageResponse } from "@/types/homepage"
 import { Section } from "@/components/layout/Section"
+import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
-import { Grid } from "@/components/layout/Grid"
+import { EditorialGrid } from "@/components/layout/EditorialGrid"
 import { BrandCard } from "@/components/commerce/BrandCard"
 
-interface BrandsSectionProps {
-    items: HomepageResponse["featured_brands"]
-}
+export default function BrandsSection({ items }) {
+  return (
+    <Section variant="default">
+      <Container size="wide">
 
-export default function BrandsSection({ items }: BrandsSectionProps) {
-    return (
-        <Section>
-            <Container size="wide">
-                <h2 className="font-serif text-3xl md:text-4xl mb-10">
-                    Featured Designers
-                </h2>
+        <SectionTitle className="mb-14">
+          Featured Designers
+        </SectionTitle>
 
-                <Grid scroll>
-                    {items.map((brand) => (
-                        <BrandCard
-                            key={brand.id}
-                            id={brand.id}
-                            name={brand.name}
-                            tagline="Runway Collection" // Tagline might need to come from somewhere else if not in API, but keeping it for consistency
-                            image={brand.logo_url}
-                            href={`/brand/${brand.slug || brand.id}`}
-                        />
-                    ))}
-                </Grid>
-            </Container>
-        </Section>
-    )
+        <EditorialGrid className="grid-cols-2 md:grid-cols-4 gap-8">
+          {items.map((brand, index) => (
+            <BrandCard
+              key={brand.id}
+              name={brand.name}
+              tagline="Runway Collection"
+              image={brand.logo_url}
+              logo={brand.logo_url}
+              href={`/brand/${brand.slug || brand.id}`}
+              className={index === 0 ? "md:col-span-2 md:row-span-2" : ""}
+            />
+          ))}
+        </EditorialGrid>
+
+      </Container>
+    </Section>
+  )
 }

@@ -1,65 +1,93 @@
 "use client"
 
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { heroZoom, fadeRise } from "@/lib/motion/presets"
+
+import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
+import { Typography } from "@/components/ui/Typography"
+import { EditorialCTA } from "@/components/ui/EditorialCTA"
+
+const heroImage =
+  "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=2000"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden flex items-center">
+    <Section variant="hero" className="overflow-hidden">
 
-      {/* Background image */}
+      {/* Background */}
       <motion.div
         variants={heroZoom}
         initial="hidden"
         animate="show"
         className="absolute inset-0 -z-10"
       >
-        <img
-          src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          className="w-full h-full object-cover"
+        <Image
+          src={heroImage}
+          alt="Crafted Fashion Event"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
         />
-        <div className="absolute inset-0 bg-white/40" />
+
+        {/* Editorial gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/20 to-white/70" />
       </motion.div>
 
-      {/* Content */}
-      <Container variant="narrow">
+      <Container size="narrow">
+
         <motion.div
           variants={fadeRise}
           initial="hidden"
           animate="show"
-          className="space-y-8 text-center"
+          className="space-y-10 text-center"
         >
-          {/* Small label */}
-          <p className="text-xs tracking-[0.35em] uppercase text-neutral-500">
+          {/* Label */}
+          <Typography
+            as="p"
+            variant="eyebrow"
+            className="tracking-[0.35em]"
+          >
             Virtual Fashion Event 2026
-          </p>
+          </Typography>
 
-          {/* BIG headline */}
-          <h1 className="[font-family:var(--font-serif)] text-5xl md:text-7xl lg:text-8xl font-light leading-[1.05] tracking-tight">
+          {/* Headline */}
+          <Typography
+            as="h1"
+            variant="display-xl"
+            className="leading-[1.05]"
+          >
             Where Design
             <br />
             Meets Story
-          </h1>
+          </Typography>
 
-          {/* Subtext */}
-          <p className="text-neutral-600 text-lg max-w-xl mx-auto leading-relaxed">
-            Discover brands, products, and programs through a curated
-            editorial experience crafted for modern events.
-          </p>
+          {/* Description */}
+          <Typography
+            variant="body-lg"
+            className="max-w-xl mx-auto text-neutral-600"
+          >
+            Discover brands, products, and runway programs through a curated
+            editorial experience crafted for modern fashion events.
+          </Typography>
 
-          {/* CTA */}
-          <div className="pt-4">
-            <a
-              href="/brands"
-              className="inline-block border border-black px-8 py-3 text-sm tracking-wide hover:bg-black hover:text-white transition-colors duration-300"
-            >
-              Explore Brands
-            </a>
+          {/* CTAs */}
+          <div className="flex justify-center gap-4 pt-4">
+
+            <EditorialCTA href="/brands">
+              Explore Designers
+            </EditorialCTA>
+
+            <EditorialCTA href="/programs">
+              View Runway
+            </EditorialCTA>
+
           </div>
         </motion.div>
+
       </Container>
-    </section>
+    </Section>
   )
 }

@@ -59,7 +59,7 @@ export default function ProductDetailPage() {
             </p>
 
             {product.price && (
-              <p className="text-lg text-neutral-900">
+              <p className="text-lg text-neutral-800">
                 {product.price}
               </p>
             )}

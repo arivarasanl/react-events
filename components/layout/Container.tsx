@@ -43,12 +43,12 @@ export function Container({
   // -------------------------
   const widthClass =
     size === "narrow"
-      ? "max-w-3xl" // ~768px (reading)
+      ? "max-w-[860px]" // ~768px (reading)
       : size === "wide"
-      ? "max-w-[1500px]" // discovery grids
+      ? "max-w-[1280px]" // discovery grids
       : size === "full"
       ? "max-w-[1800px]" // near full-bleed (rare)
-      : "max-w-[1320px]" // default editorial
+      : "max-w-[1100px]" // default editorial
 
   return (
     <div

@@ -22,7 +22,7 @@ export function Footer() {
 
           {/* Explore */}
           <div className="space-y-5 text-sm">
-            <h4 className="text-neutral-900 tracking-wide">
+            <h4 className="text-neutral-800 tracking-wide">
               Explore
             </h4>
 
@@ -47,7 +47,7 @@ export function Footer() {
 
           {/* Account */}
           <div className="space-y-5 text-sm">
-            <h4 className="text-neutral-900 tracking-wide">
+            <h4 className="text-neutral-800 tracking-wide">
               Account
             </h4>
 

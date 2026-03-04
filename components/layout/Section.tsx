@@ -38,7 +38,7 @@ export function Section({
        Default (most sections)
     ------------------------------------------ */
     case "default":
-      spacingClass = "py-24 md:py-32"
+      spacingClass = "py-28 md:py-36"
       break
 
     /* ------------------------------------------
@@ -60,14 +60,14 @@ export function Section({
        Feature / storytelling
     ------------------------------------------ */
     case "feature":
-      spacingClass = "py-32 md:py-40"
+      spacingClass = "py-36 md:py-44"
       break
 
     /* ------------------------------------------
        Tight sections
     ------------------------------------------ */
     case "tight":
-      spacingClass = "py-14 md:py-18"
+      spacingClass = "py-16 md:py-20"
       break
 
     /* ------------------------------------------

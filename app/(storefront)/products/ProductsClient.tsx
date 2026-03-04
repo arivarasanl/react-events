@@ -61,7 +61,7 @@ export function ProductsClient({ products }: ProductsClientProps) {
 	            inline-flex items-center gap-2
 	            text-sm
 	            text-neutral-500
-	            hover:text-neutral-900
+	            hover:text-neutral-800
 	            transition-colors
 	          "
 	        >

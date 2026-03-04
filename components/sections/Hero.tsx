@@ -33,7 +33,7 @@ export function Hero() {
         />
 
         {/* Editorial gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/20 to-white/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80" />
       </motion.div>
 
       <Container size="narrow">

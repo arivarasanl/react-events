@@ -49,10 +49,7 @@ export default async function BrandDetailsPage({
   return (
     <main className="min-h-screen bg-stone-50">
 
-            <StickyBrandBar
-        name={brand.name}
-        logo={brand.logo_url}
-      />
+      <StickyBrandBar name={brand.name} />
       <BrandHero brand={brand} />
 
       {/* Signature Looks (overlapping hero) */}

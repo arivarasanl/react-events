@@ -21,7 +21,7 @@ export function StickyBrandBar({ name }: { name: string }) {
       animate={{ y: visible ? 0 : -60, opacity: visible ? 1 : 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="
-        fixed top-16 left-0 right-0 z-40
+        fixed top-0 left-0 right-0 z-40
         bg-white/90 backdrop-blur
         border-b border-neutral-200
       "

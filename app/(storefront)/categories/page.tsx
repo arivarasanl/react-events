@@ -1,8 +1,9 @@
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Grid } from "@/components/layout/Grid"
-import { ImageCard } from "@/components/media/ImageCard"
+import { ImageTile } from "@/components/ui/ImageTile"
 import { Typography } from "@/components/ui/Typography"
+import Link from "next/link"
 
 const categories = [
   {
@@ -49,7 +50,7 @@ export default function CategoriesPage() {
       <Container>
         {/* Section 1: Page Intro */}
         <div className="max-w-[720px]">
-          <Typography as="h1" size="display-lg">
+          <Typography as="h1" variant="display-lg">
             Categories
           </Typography>
         </div>
@@ -58,12 +59,12 @@ export default function CategoriesPage() {
         <div className="mt-space-7">
           <Grid columns={3}>
             {categories.map((category) => (
-              <ImageCard
-                key={category.id}
-                title={category.title}
-                image={category.image}
-                href={`/categories/${category.id}`}
-              />
+              <Link key={category.id} href={`/categories/${category.id}`} className="block focus:outline-none">
+                <div className="flex flex-col gap-4">
+                  <ImageTile src={category.image} alt={category.title} aspect="portrait" />
+                  <Typography variant="subsection">{category.title}</Typography>
+                </div>
+              </Link>
             ))}
           </Grid>
         </div>

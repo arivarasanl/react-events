@@ -1,84 +1,80 @@
 "use client"
 
 import Link from "next/link"
+import { getImageUrl } from "@/lib/utils/getImageUrl"
 
-type Brand = {
-  name: string
-  slug: string
-  product_count: number
-  logo_url: string | null
-  banner_url: string | null
-  top_products: {
-    id: number
-    slug: string
-    name: string
-    image_url?: string
-  }[]
-}
-
-export function BrandCard({ brand }: { brand: Brand }) {
+export function BrandCard({ brand }: any) {
   return (
     <Link
       href={`/brands/${brand.slug}`}
-      className="group block rounded-2xl overflow-hidden bg-white"
+      className="
+        group block overflow-hidden rounded-2xl bg-white
+        border border-transparent
+        hover:border-neutral-200
+        transition duration-300
+      "
     >
-      {/* Banner */}
-      <div className="relative h-48 w-full bg-neutral-100 overflow-hidden">
+      {/* Image */}
+      <div className="relative h-48 w-full overflow-hidden bg-neutral-100">
         {brand.banner_url ? (
           <img
-            src={brand.banner_url}
+            src={getImageUrl(brand.banner_url)}
             alt={brand.name}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="
+              h-full w-full object-cover
+              transition-transform duration-700 ease-out
+              group-hover:scale-105
+            "
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-neutral-100 to-neutral-200" />
+          <div className="flex h-full items-center justify-center bg-neutral-200">
+            <span className="text-3xl text-neutral-400">
+              {brand.name.charAt(0)}
+            </span>
+          </div>
         )}
-
-        {/* Overlay (luxury subtle darkening on hover) */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
       </div>
 
       {/* Content */}
-      <div className="p-5 space-y-4">
-        {/* Brand Info */}
+      <div className="p-4 space-y-3">
+        {/* Logo + Info */}
         <div className="flex items-center gap-3">
           {brand.logo_url ? (
             <img
-              src={brand.logo_url}
+              src={getImageUrl(brand.logo_url)}
               alt={brand.name}
-              className="h-10 w-10 object-contain rounded-full bg-white border"
+              className="
+                h-9 w-9 rounded-full object-cover
+                bg-white border border-neutral-200
+              "
             />
           ) : (
-            <div className="h-10 w-10 rounded-full bg-neutral-200" />
+            <div className="h-9 w-9 rounded-full bg-neutral-200" />
           )}
 
           <div className="min-w-0">
-            <h3 className="text-base font-medium text-neutral-900 truncate">
+            <h3 className="text-sm font-medium text-neutral-900 truncate">
               {brand.name}
             </h3>
-            <p className="text-sm text-neutral-500">
-              {brand.product_count} Products
+            <p className="text-xs text-neutral-500">
+              {brand.product_count} products
             </p>
           </div>
         </div>
 
-        {/* Top Products Preview */}
+        {/* Product previews */}
         {brand.top_products?.length > 0 && (
           <div className="flex gap-2">
-            {brand.top_products.slice(0, 3).map((product) => (
+            {brand.top_products.slice(0, 3).map((p: any, i: number) => (
               <div
-                key={product.id}
-                className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-neutral-100"
+                key={i}
+                className="h-12 w-12 overflow-hidden rounded-md bg-neutral-100"
               >
-                {product.image_url ? (
-                  <img
-                    src={product.image_url}
-                    alt={product.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="h-full w-full bg-neutral-200" />
-                )}
+                <img
+                  src={getImageUrl(p.image_url)}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
               </div>
             ))}
           </div>

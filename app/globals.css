@@ -20,3 +20,51 @@ body {
 .scrollbar-hide {
   scrollbar-width: none;
 }
+
+
+/* ---------- brand details page ------------ */
+/* DISPLAY (Hero / Big Moments) */
+.type-display {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* HEADLINE (Section Titles) */
+.type-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* BODY (Main text) */
+.type-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgb(82 82 82); /* neutral-600 */
+}
+
+/* LARGE BODY (hero description / intro) */
+.type-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: rgb(115 115 115); /* neutral-500 */
+}
+
+/* META (labels, tags) */
+.type-meta {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(163 163 163); /* neutral-400 */
+}
+
+/* CAPTION */
+.type-caption {
+  font-size: 0.8rem;
+  color: rgb(115 115 115);
+}
+
+/* -------- eof ---------  */

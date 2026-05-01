@@ -30,11 +30,12 @@ export function BrandsGrid({ brands }: { brands: Brand[] }) {
         grid-cols-1
         sm:grid-cols-2
         lg:grid-cols-3
+        xl:grid-cols-4
       "
     >
-      {brands.map((brand) => (
+      {brands.map((brand, index) =>
         <BrandCard key={brand.slug} brand={brand} />
-      ))}
+      )}
     </div>
   )
 }

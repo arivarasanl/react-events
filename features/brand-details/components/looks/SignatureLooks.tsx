@@ -8,9 +8,6 @@ export function SignatureLooks({ products }: any) {
 
   return (
     <Section className="-mt-32 relative z-10">
-
-      <Container className="bg-white rounded-2xl shadow-xl p-12">
-
         <SectionTitle className="mb-12">
           Signature Looks
         </SectionTitle>
@@ -30,9 +27,6 @@ export function SignatureLooks({ products }: any) {
           ))}
 
         </LookbookGrid>
-
-      </Container>
-
     </Section>
   )
 }

@@ -26,6 +26,18 @@ Allowed:
 
 * inline styled div-based UI patterns
 
+🟪 Editorial (no Card)
+ProductCard ✅
+Brand pages ✅
+Landing sections ✅
+Category exploration ✅
+🟦 Structured (use Card)
+Programs list ✅
+Program detail blocks ✅
+User dashboard (future) ✅
+Filters panel (future) ✅
+Forms (future) ✅
+
 ---
 
 ## 2. Typography (STRICT)

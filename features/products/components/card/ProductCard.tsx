@@ -11,12 +11,9 @@ type ProductCardProps = {
   name: string
   image: string
   href: string
-
   brand?: string
   price?: number | string
-
   aspect?: "portrait" | "square" | "landscape"
-
   priority?: boolean
   className?: string
 }
@@ -36,8 +33,8 @@ export function ProductCard({
       href={href}
       className={clsx("group block focus:outline-none", className)}
     >
-      <article className="space-y-5">
-
+      <article className="space-y-4">
+        
         <ImageTile
           src={image}
           alt={name}
@@ -48,12 +45,12 @@ export function ProductCard({
 
         <div className="space-y-1">
           {brand && (
-            <Muted className="uppercase tracking-wider">
+            <Muted className="uppercase tracking-wide">
               {brand}
             </Muted>
           )}
 
-          <CardTitle className="leading-tight tracking-tight">
+          <CardTitle>
             {name}
           </CardTitle>
 

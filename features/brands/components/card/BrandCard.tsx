@@ -3,7 +3,7 @@
 import { ImageTile } from "@/components/ui/ImageTile"
 import Link from "next/link"
 import clsx from "clsx"
-import { CardTitle, Muted } from "@/components/ui/Typography"
+import { SectionTitle, Caption } from "@/components/ui/Typography"
 
 type BrandCardProps = {
   name: string
@@ -54,7 +54,7 @@ export function BrandCard({
         </div>
       )}
 
-      {/* Hover info */}
+      {/* Hover info — renders on a dark gradient overlay; tone="inverse" governs all text */}
       <div
         className="
         absolute bottom-0 left-0 right-0
@@ -65,15 +65,11 @@ export function BrandCard({
         transition
         "
       >
-        <div className="text-white">
-          <CardTitle>{name}</CardTitle>
+        <SectionTitle as="h4" tone="inverse">{name}</SectionTitle>
 
-          {tagline && (
-            <Muted className="text-white/80">
-              {tagline}
-            </Muted>
-          )}
-        </div>
+        {tagline && (
+          <Caption tone="inverse">{tagline}</Caption>
+        )}
       </div>
 
     </Link>

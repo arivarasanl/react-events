@@ -5,6 +5,8 @@ import Link from "next/link"
 import clsx from "clsx"
 import React from "react"
 
+import { SectionTitle, Caption } from "@/components/ui/Typography"
+
 type CategoryCardProps = {
   title: string
   subtitle?: string
@@ -40,14 +42,11 @@ export function CategoryCard({
         />
 
         <div className="space-y-1">
-          <h3 className="font-serif text-base md:text-lg leading-tight tracking-tight">
-            {title}
-          </h3>
+          {/* size="compact" preserves the original text-base md:text-lg scale exactly */}
+          <SectionTitle as="h3" size="compact">{title}</SectionTitle>
 
           {subtitle && (
-            <p className="text-xs text-neutral-500">
-              {subtitle}
-            </p>
+            <Caption tone="muted">{subtitle}</Caption>
           )}
         </div>
 

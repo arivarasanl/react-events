@@ -5,7 +5,7 @@ import Link from "next/link"
 import clsx from "clsx"
 import React from "react"
 
-import { CardTitle, Text, Muted } from "@/components/ui/Typography"
+import { SectionTitle, Body, Meta } from "@/components/ui/Typography"
 
 type ProductCardProps = {
   name: string
@@ -34,7 +34,7 @@ export function ProductCard({
       className={clsx("group block focus:outline-none", className)}
     >
       <article className="space-y-4">
-        
+
         <ImageTile
           src={image}
           alt={name}
@@ -44,22 +44,19 @@ export function ProductCard({
         />
 
         <div className="space-y-1">
+          {/* Brand identifier — editorial label role, not a caption or helper text */}
           {brand && (
-            <Muted className="uppercase tracking-wide">
-              {brand}
-            </Muted>
+            <Meta>{brand}</Meta>
           )}
 
-          <CardTitle>
-            {name}
-          </CardTitle>
+          <SectionTitle as="h4">{name}</SectionTitle>
 
           {price !== undefined && (
-            <Text>
+            <Body>
               {typeof price === "number"
                 ? `₹${price.toLocaleString()}`
                 : price}
-            </Text>
+            </Body>
           )}
         </div>
 

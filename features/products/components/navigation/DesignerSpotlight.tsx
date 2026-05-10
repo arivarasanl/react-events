@@ -2,6 +2,8 @@
 
 import { useProducts } from "@/features/products/context/products"
 
+import { Subtitle } from "@/components/ui/Typography"
+
 export function DesignerSpotlight() {
   const { products, setBrand } = useProducts()
 
@@ -18,9 +20,9 @@ export function DesignerSpotlight() {
   return (
     <div className="mb-16 space-y-6">
 
-      <h2 className="text-xs uppercase tracking-widest text-neutral-500">
+      <Subtitle className="uppercase tracking-widest">
         Designer Spotlight
-      </h2>
+      </Subtitle>
 
       <div className="flex flex-wrap gap-4">
 

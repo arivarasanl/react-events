@@ -5,6 +5,8 @@ import Link from "next/link"
 import clsx from "clsx"
 import React from "react"
 
+import { CardTitle, Text, Muted } from "@/components/ui/Typography"
+
 type ProductCardProps = {
   name: string
   image: string
@@ -46,21 +48,21 @@ export function ProductCard({
 
         <div className="space-y-1">
           {brand && (
-            <p className="text-[11px] uppercase tracking-wider text-neutral-500">
+            <Muted className="uppercase tracking-wider">
               {brand}
-            </p>
+            </Muted>
           )}
 
-          <h3 className="font-serif text-lg md:text-xl leading-tight tracking-tight">
+          <CardTitle className="leading-tight tracking-tight">
             {name}
-          </h3>
+          </CardTitle>
 
           {price !== undefined && (
-            <p className="text-sm text-neutral-700">
+            <Text>
               {typeof price === "number"
                 ? `₹${price.toLocaleString()}`
                 : price}
-            </p>
+            </Text>
           )}
         </div>
 

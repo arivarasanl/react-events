@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { CardTitle, Muted, Caption } from "@/components/ui/Typography"
 
 export function Programs({ programs }: any) {
   if (!programs || programs.length === 0) return null
@@ -12,7 +13,7 @@ export function Programs({ programs }: any) {
 
         {/* Label */}
         <div className="mb-10">
-          <span className="type-meta">Programs</span>
+          <Caption>Programs</Caption>
         </div>
 
         {/* List */}
@@ -30,18 +31,18 @@ export function Programs({ programs }: any) {
               <div className="flex justify-between items-start gap-6">
 
                 <div>
-                  <h3 className="type-body text-neutral-900">
+                  <CardTitle className="text-neutral-900">
                     {p.title}
-                  </h3>
+                  </CardTitle>
 
-                  <p className="type-caption mt-2">
+                  <Muted className="mt-2">
                     {p.description}
-                  </p>
+                  </Muted>
                 </div>
 
-                <span className="type-meta whitespace-nowrap">
+                <Caption className="whitespace-nowrap">
                   {p.date}
-                </span>
+                </Caption>
 
               </div>
             </motion.div>

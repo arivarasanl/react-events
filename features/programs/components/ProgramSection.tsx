@@ -1,6 +1,6 @@
 import { Section, Container } from "@/components/layout"
 
-import { Typography } from "@/components/ui/Typography"
+import { Title } from "@/components/ui/Typography"
 import { ProgramGrid } from "./ProgramGrid"
 
 export function ProgramSection({
@@ -15,9 +15,9 @@ export function ProgramSection({
   return (
     <Section>
       <Container>
-      <Typography as="h2" variant="section">
+      <Title>
         {title}
-      </Typography>
+      </Title>
         <ProgramGrid programs={programs} />
       </Container>
     </Section>

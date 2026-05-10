@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { getImageUrl } from "@/lib/utils/getImageUrl"
+import { CardTitle, Muted } from "@/components/ui/Typography"
 
 export function BrandCard({ brand }: any) {
   return (
@@ -53,12 +54,12 @@ export function BrandCard({ brand }: any) {
           )}
 
           <div className="min-w-0">
-            <h3 className="text-sm font-medium text-neutral-900 truncate">
+            <CardTitle className="font-medium text-neutral-900 truncate">
               {brand.name}
-            </h3>
-            <p className="text-xs text-neutral-500">
+            </CardTitle>
+            <Muted>
               {brand.product_count} products
-            </p>
+            </Muted>
           </div>
         </div>
 

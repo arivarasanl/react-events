@@ -3,7 +3,8 @@ import { Section } from "@/components/layout/Section"
 import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { Grid } from "@/components/layout/Grid"
-import { ProductCard } from "@/components/commerce/ProductCard"
+import { ProductCard } from "@/features/products/components/card/ProductCard"
+
 
 interface ProductsSectionProps {
     items: HomepageResponse["featured_products"]

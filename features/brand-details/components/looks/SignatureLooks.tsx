@@ -2,7 +2,7 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { SectionTitle } from "@/components/ui/SectionTitle"
 import { LookbookGrid } from "@/components/layout/LookbookGrid"
-import { ProductCard } from "@/components/commerce/ProductCard"
+import { ProductCard } from "@/features/products/components/card/ProductCard"
 import { ImageTile } from "@/components/ui/ImageTile"
 export function SignatureLooks({ products }: any) {
 

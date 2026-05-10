@@ -3,7 +3,8 @@ import { Section } from "@/components/layout/Section"
 import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { EditorialGrid } from "@/components/layout/EditorialGrid"
-import { BrandCard } from "@/components/commerce/BrandCard"
+import { BrandCard } from "@/features/brands/components/card/BrandCard"
+
 
 export default function BrandsSection({ items }) {
   return (

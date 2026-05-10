@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { CardTitle, Caption } from "@/components/ui/Typography"
 
 export function Editorial({ items }: any) {
   return (
@@ -10,7 +11,7 @@ export function Editorial({ items }: any) {
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
 
         <div className="mb-12">
-          <span className="type-meta text-white/60">Editorial</span>
+          <Caption className="text-white/60">Editorial</Caption>
         </div>
 
         <div className="grid md:grid-cols-3 gap-10">
@@ -28,7 +29,7 @@ export function Editorial({ items }: any) {
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition" />
               </div>
 
-              <h3 className="mt-4 text-lg">{item.title}</h3>
+              <CardTitle className="mt-4">{item.title}</CardTitle>
 
             </Link>
           ))}

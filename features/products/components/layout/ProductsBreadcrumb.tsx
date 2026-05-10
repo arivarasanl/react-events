@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { buildProductsUrl } from "@/lib/utils/buildProductsUrl"
+import { Text } from "@/components/ui/Typography"
 
 type Props = {
   category?: string
@@ -41,9 +42,9 @@ export function ProductsBreadcrumb({ category, subcategory }: Props) {
       {subcategory && (
         <>
           <span className="mx-2">/</span>
-          <span className="text-neutral-800">
+          <Text className="text-neutral-800">
             {format(subcategory)}
-          </span>
+          </Text>
         </>
       )}
 

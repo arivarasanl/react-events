@@ -1,7 +1,7 @@
 import { Section, Container } from "@/components/layout"
 import { ProgramSection } from "@/features/programs/components/ProgramSection"
 import { getPrograms } from "@/lib/api/programs"
-import { Typography } from "@/components/ui/Typography"
+import { Title } from "@/components/ui/Typography"
 
 export default async function ProgramsPage() {
   const [current, future, past] = await Promise.all([
@@ -14,9 +14,9 @@ export default async function ProgramsPage() {
     <>
       <Section>
         <Container>
-        <Typography as="h1" variant="display-lg">
+        <Title>
           Programs
-        </Typography>
+        </Title>
         </Container>
       </Section>
       <ProgramSection title="Live Now" programs={current.data} />

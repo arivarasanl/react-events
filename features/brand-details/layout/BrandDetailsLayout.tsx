@@ -7,8 +7,8 @@ import { Editorial } from "@/features/brand-details/components/editorial/Editori
 import { ConnectWithBrand } from "@/features/brand-details/components/connect/ConnectWithBrand"
 import { RelatedBrands } from "@/features/brand-details/components/related/RelatedBrands"
 import { StickyBrandBar } from "@/features/brand-details/components/navigation/StickyBrandBar"
+import { ThemedProducts } from "@/features/brand-details/components/collections/ThemedProducts"
 
-import { ThemedProducts } from "@/components/brand/ThemedProducts"
 import ProductsSection from "@/components/sections/ProductsSection"
 import ProgramsSection from "@/components/sections/ProgramsSection"
 import DesignerCarousel from "@/components/sections/DesignerCarousel"

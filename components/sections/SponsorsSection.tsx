@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section"
 import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
+import { Caption } from "@/components/ui/Typography"
 
 export default function SponsorsSection({ items }) {
   return (
@@ -36,9 +37,9 @@ export default function SponsorsSection({ items }) {
                     "
                   />
                 ) : (
-                  <span className="text-neutral-400 text-sm">
+                  <Caption>
                     {s.name || (s as any).bane}
-                  </span>
+                  </Caption>
                 )}
               </a>
             ))}

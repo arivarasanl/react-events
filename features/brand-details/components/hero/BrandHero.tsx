@@ -4,10 +4,9 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Reveal } from "@/components/motion/Reveal"
 import { ScrollDiscover } from "@/components/ui/ScrollDiscover"
-import { Typography } from "@/components/ui/Typography"
+import { Title, Text } from "@/components/ui/Typography"
 
 export function BrandHero({ brand }: any) {
-
   const { scrollY } = useScroll()
 
   // background parallax
@@ -23,12 +22,8 @@ export function BrandHero({ brand }: any) {
       id="brand-hero"
       className="relative h-[92vh] min-h-[620px] w-full overflow-hidden"
     >
-
       {/* Parallax Background */}
-      <motion.div
-        style={{ y: bgY }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ y: bgY }} className="absolute inset-0">
         <Image
           src={brand.cover_image || brand.logo_url}
           alt={brand.name}
@@ -40,18 +35,19 @@ export function BrandHero({ brand }: any) {
       </motion.div>
 
       {/* Cinematic Gradient */}
-      <div className="
+      <div
+        className="
         absolute inset-0
         bg-gradient-to-t
         from-black/70
         via-black/25
         to-transparent
-      " />
+      "
+      />
 
       {/* Editorial Content */}
       <div className="absolute bottom-28 w-full">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12 text-white">
-
           {/* Optional Logo */}
           {brand.logo_url && (
             <Reveal>
@@ -69,44 +65,37 @@ export function BrandHero({ brand }: any) {
               style={{
                 y: titleY,
                 scale: titleScale,
-                opacity: titleOpacity
+                opacity: titleOpacity,
               }}
             >
-              <Typography
+              <Title
                 id="brand-hero-title"
-                as="h1"
-                variant="display"
                 className="text-white max-w-3xl"
               >
                 {brand.name}
-              </Typography>
+              </Title>
             </motion.div>
           </Reveal>
 
           {/* Tagline */}
           {brand.tagline && (
             <Reveal>
-              <Typography
-                as="p"
-                variant="body"
+              <Text
                 className="
                   mt-5
                   text-white/90
                   max-w-xl
-                  text-lg md:text-xl
                 "
               >
                 {brand.tagline}
-              </Typography>
+              </Text>
             </Reveal>
           )}
-
         </div>
       </div>
 
       {/* Scroll Indicator */}
       <ScrollDiscover />
-
     </section>
   )
 }

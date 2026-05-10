@@ -5,6 +5,8 @@ type Props = {
   onClick?: () => void
 }
 
+import { Caption } from "@/components/ui/Typography"
+
 export function FilterItem({
   label,
   count,
@@ -42,16 +44,16 @@ export function FilterItem({
 
       {/* Count */}
       {count !== undefined && (
-        <span
+        <Caption
           className={`
-            text-xs tabular-nums transition
+            tabular-nums transition
             ${active
               ? "text-black"
-              : "text-neutral-400 group-hover:text-neutral-600"}
+              : "group-hover:text-neutral-600"}
           `}
         >
           {count}
-        </span>
+        </Caption>
       )}
     </button>
   )

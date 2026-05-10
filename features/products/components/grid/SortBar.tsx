@@ -2,6 +2,8 @@
 
 import { useProducts } from "@/features/products/context/products"
 
+import { Muted } from "@/components/ui/Typography"
+
 export function SortBar() {
   const { meta, query, setSort } = useProducts()
 
@@ -10,9 +12,9 @@ export function SortBar() {
   return (
     <div className="flex items-center justify-between border-b pb-6">
 
-      <p className="text-sm text-neutral-500">
+      <Muted>
         {meta.total_count} Products
-      </p>
+      </Muted>
 
       <select
         value={currentSort}

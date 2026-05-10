@@ -1,14 +1,16 @@
+import { CardTitle, Muted } from "@/components/ui/Typography"
+
 export function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-24 text-center">
 
-      <h3 className="text-lg font-medium text-neutral-900 mb-2">
+      <CardTitle className="mb-2">
         No products found
-      </h3>
+      </CardTitle>
 
-      <p className="text-sm text-neutral-500 mb-6 max-w-sm">
+      <Muted className="mb-6 max-w-sm">
         Try adjusting your filters or explore other collections to find something you love.
-      </p>
+      </Muted>
 
       <a
         href="/products"

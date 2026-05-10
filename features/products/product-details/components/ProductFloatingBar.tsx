@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Text, Muted } from "@/components/ui/Typography"
 
 type Props = {
   productName: string
@@ -30,14 +31,14 @@ export function ProductFloatingBar({ productName, brandName }: Props) {
 
         <div className="flex flex-col">
           {brandName && (
-            <span className="text-xs uppercase tracking-widest text-neutral-500">
+            <Muted className="uppercase tracking-widest">
               {brandName}
-            </span>
+            </Muted>
           )}
 
-          <span className="text-sm font-medium">
+          <Text className="font-medium">
             {productName}
-          </span>
+          </Text>
         </div>
 
         <button className="border px-6 py-2 hover:bg-black hover:text-white transition">

@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { Title } from "@/components/ui/Typography"
 
 type SectionTitleProps = {
   children: React.ReactNode
@@ -12,14 +13,13 @@ export function SectionTitle({
   className,
 }: SectionTitleProps) {
   return (
-    <h2
+    <div
       className={clsx(
-        "font-serif text-3xl md:text-4xl tracking-tight",
         align === "center" && "text-center",
         className
       )}
     >
-      {children}
-    </h2>
+      <Title>{children}</Title>
+    </div>
   )
 }

@@ -4,7 +4,7 @@ import { HomepageResponse } from "@/types/homepage"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { SectionTitle } from "@/components/ui/SectionTitle"
-import { BrandCard } from "@/components/commerce/BrandCard"
+import { BrandCard } from "@/features/brands/components/card/BrandCard"
 
 type Props = {
   items: HomepageResponse["featured_brands"]

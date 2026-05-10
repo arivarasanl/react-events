@@ -6,7 +6,7 @@ import { heroZoom, fadeRise } from "@/lib/motion/presets"
 
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { Typography } from "@/components/ui/Typography"
+import { Title, Subtitle, Text, Muted, Caption } from "@/components/ui/Typography"
 import { EditorialCTA } from "@/components/ui/EditorialCTA"
 
 type SplitHeroProps = {
@@ -54,53 +54,39 @@ export function SplitHero({ program }: SplitHeroProps) {
             className="space-y-8"
           >
 
-            <Typography
-              as="p"
-              variant="eyebrow"
-              className="tracking-[0.35em]"
-            >
+            <Caption className="tracking-[0.35em] block">
               Crafted Fashion Week
-            </Typography>
+            </Caption>
 
-            <Typography
-              as="h1"
-              variant="display-xl"
-              className="leading-[1.05]"
-            >
+            <Title className="leading-[1.05]">
               Where Design
               <br />
               Meets Story
-            </Typography>
+            </Title>
 
-            <Typography
-              variant="body-lg"
-              className="text-neutral-600 max-w-md"
-            >
+            <Text className="text-neutral-600 max-w-md">
               Discover brands, products, and runway programs through a
               curated editorial experience crafted for modern events.
-            </Typography>
+            </Text>
 
             {program && (
               <div className="pt-6 space-y-4 border-t border-neutral-200">
 
-                <Typography variant="eyebrow">
+                <Caption className="block">
                   Upcoming Runway
-                </Typography>
+                </Caption>
 
-                <Typography
-                  as="h3"
-                  variant="display-sm"
-                >
+                <Subtitle>
                   {program.brand}
-                </Typography>
+                </Subtitle>
 
-                <Typography variant="body">
+                <Text>
                   {program.title}
-                </Typography>
+                </Text>
 
-                <Typography variant="body-sm" className="text-neutral-500">
+                <Muted className="text-neutral-500">
                   {program.time}
-                </Typography>
+                </Muted>
 
                 <EditorialCTA href={`/program/${program.slug}`}>
                   Watch Runway

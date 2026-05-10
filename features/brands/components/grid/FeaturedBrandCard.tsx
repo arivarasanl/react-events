@@ -12,6 +12,8 @@ type Brand = {
   top_products: { image_url?: string }[]
 }
 
+import { CardTitle, Muted } from "@/components/ui/Typography"
+
 export function FeaturedBrandCard({ brand }: { brand: Brand }) {
   const products = brand.top_products || []
   const hasFullCollage = products.length >= 3
@@ -70,12 +72,12 @@ export function FeaturedBrandCard({ brand }: { brand: Brand }) {
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
           <div className="flex items-end justify-between">
             <div>
-              <h3 className="text-xl md:text-2xl font-medium text-white">
+              <CardTitle className="font-medium text-white">
                 {brand.name}
-              </h3>
-              <p className="text-sm text-white/80">
+              </CardTitle>
+              <Muted className="text-white/80">
                 {brand.product_count} products
-              </p>
+              </Muted>
             </div>
 
             {brand.logo_url && (

@@ -1,5 +1,7 @@
 import { ProductActions } from "./ProductActions"
 
+import { Title, Text, Muted } from "@/components/ui/Typography"
+
 export function ProductInfo({ product }) {
 
   return (
@@ -7,22 +9,22 @@ export function ProductInfo({ product }) {
 
       <div>
 
-        <p className="text-xs uppercase tracking-widest text-neutral-500">
+        <Muted className="uppercase tracking-widest">
           {product.brand_name}
-        </p>
+        </Muted>
 
-        <h1 className="text-3xl font-light mt-2">
+        <Title className="mt-2">
           {product.name}
-        </h1>
+        </Title>
 
       </div>
 
       <ProductActions />
 
       {product.description && (
-        <p className="text-sm text-neutral-600 leading-relaxed">
+        <Text>
           {product.description}
-        </p>
+        </Text>
       )}
 
     </div>

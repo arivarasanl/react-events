@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
+import { Muted } from "@/components/ui/Typography"
 
 export function BrandsToolbar({ sorting }: { sorting: any[] }) {
   const router = useRouter()
@@ -15,7 +16,7 @@ export function BrandsToolbar({ sorting }: { sorting: any[] }) {
 
   return (
     <div className="flex justify-between items-center">
-      <p className="text-sm text-neutral-500"></p>
+      <Muted></Muted>
 
       <select
         value={searchParams.get("sort") || ""}

@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { Caption } from "@/components/ui/Typography"
 
 export function Collections({ collections }: any) {
   return (
@@ -12,7 +13,7 @@ export function Collections({ collections }: any) {
         {collections.map((col: any, idx: number) => (
           <div key={col.title} className={idx > 0 ? "mt-20" : ""}>
 
-            <h2 className="type-meta mb-10">{col.title}</h2>
+            <Caption className="mb-10 block">{col.title}</Caption>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 
@@ -28,7 +29,7 @@ export function Collections({ collections }: any) {
                     />
                   </div>
 
-                  <p className="type-caption mt-3">{p.name}</p>
+                  <Caption className="mt-3 block">{p.name}</Caption>
 
                 </Link>
               ))}

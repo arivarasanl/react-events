@@ -1,6 +1,7 @@
 "use client"
 
 import { useProducts } from "@/features/products/context/products"
+import { Caption } from "@/components/ui/Typography"
 
 export function ActiveFilters() {
   const { query, setBrand, setTheme, setOccasion } = useProducts()
@@ -70,9 +71,9 @@ export function ActiveFilters() {
             {filter.value.replace("-", " ")}
           </span>
 
-          <span className="text-neutral-400 group-hover:text-black transition">
+          <Caption className="group-hover:text-black transition">
             ✕
-          </span>
+          </Caption>
         </button>
       ))}
 

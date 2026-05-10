@@ -7,6 +7,7 @@ import { BrandsNavigation } from "../navigation/BrandsNavigation"
 import { BrandsToolbar } from "../toolbar/BrandsToolbar"
 import { FeaturedBrandCard } from "../grid/FeaturedBrandCard"
 import { ActiveFiltersBar } from "../filters/ActiveFiltersBar"
+import { Title, Muted, Caption } from "@/components/ui/Typography"
 
 type BrandsLayoutProps = {
   data: any
@@ -30,13 +31,13 @@ export function BrandsLayout({ data }: BrandsLayoutProps) {
   <div className="space-y-3">
     {/*<BrandsNavigation navigation={data.navigation} />*/}
 
-    <h1 className="text-3xl md:text-4xl font-light text-neutral-900">
+    <Title className="font-light text-neutral-900">
       Discover Brands
-    </h1>
+    </Title>
 
-    <p className="text-sm text-neutral-500 max-w-xl">
+    <Muted className="max-w-xl">
       Curated designers redefining modern luxury.
-    </p>
+    </Muted>
   </div>
 
   {/* Toolbar */}
@@ -58,9 +59,9 @@ export function BrandsLayout({ data }: BrandsLayoutProps) {
       {/* Featured */}
       {featured && (
         <section className="space-y-4">
-          <h2 className="text-xs uppercase tracking-wide text-neutral-500">
+          <Caption>
             Featured
-          </h2>
+          </Caption>
 
           <div className="-mx-4 md:-mx-6">
             <div className="max-w-6xl mx-auto">
@@ -86,9 +87,9 @@ export function BrandsLayout({ data }: BrandsLayoutProps) {
         <main className="flex-1 min-w-0 space-y-6">
           {/* Header Row */}
           <div className="flex items-center justify-between">
-            <h2 className="text-xs uppercase tracking-wide text-neutral-500">
+            <Caption>
               All Brands
-            </h2>
+            </Caption>
 
             {/* Toggle */}
             <button

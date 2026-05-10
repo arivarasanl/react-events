@@ -4,6 +4,7 @@ import { EditorialCTA } from "@/components/ui/EditorialCTA"
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
+import { Title, Text } from "@/components/ui/Typography"
 import Image from "next/image"
 
 export default function RunwayHighlightSection({ item }) {
@@ -34,14 +35,14 @@ export default function RunwayHighlightSection({ item }) {
               <Reveal>
                 <div className="max-w-xl text-white space-y-6">
 
-                  <h2 className="font-serif text-4xl md:text-5xl leading-tight">
+                  <Title className="leading-tight text-white">
                     {item.title}
-                  </h2>
+                  </Title>
 
                   {item.description && (
-                    <p className="text-lg text-white/90">
+                    <Text className="text-white/90">
                       {item.description}
-                    </p>
+                    </Text>
                   )}
 
                   <EditorialCTA href={`/program/${item.slug}`}>

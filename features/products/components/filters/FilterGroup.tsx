@@ -14,6 +14,8 @@ type Props = {
   param: string
 }
 
+import { CardTitle, Text, Caption } from "@/components/ui/Typography"
+
 export function FilterGroup({ title, options, param }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -36,9 +38,9 @@ export function FilterGroup({ title, options, param }: Props) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xs uppercase tracking-wider text-neutral-500">
+      <CardTitle className="uppercase tracking-wider">
         {title}
-      </h3>
+      </CardTitle>
 
       <div className="space-y-3">
         {options.map((option) => {
@@ -50,7 +52,7 @@ export function FilterGroup({ title, options, param }: Props) {
               onClick={() => toggleFilter(option.slug)}
               className="flex w-full items-center justify-between text-sm text-left group"
             >
-              <span
+              <Text
                 className={
                   isActive
                     ? "font-medium text-neutral-900"
@@ -58,11 +60,11 @@ export function FilterGroup({ title, options, param }: Props) {
                 }
               >
                 {option.name}
-              </span>
+              </Text>
 
-              <span className="text-neutral-400 text-xs">
+              <Caption>
                 {option.count}
-              </span>
+              </Caption>
             </button>
           )
         })}

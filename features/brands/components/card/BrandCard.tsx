@@ -3,6 +3,7 @@
 import { ImageTile } from "@/components/ui/ImageTile"
 import Link from "next/link"
 import clsx from "clsx"
+import { CardTitle, Muted } from "@/components/ui/Typography"
 
 type BrandCardProps = {
   name: string
@@ -65,12 +66,12 @@ export function BrandCard({
         "
       >
         <div className="text-white">
-          <h3 className="font-serif text-lg">{name}</h3>
+          <CardTitle>{name}</CardTitle>
 
           {tagline && (
-            <p className="text-sm text-white/80">
+            <Muted className="text-white/80">
               {tagline}
-            </p>
+            </Muted>
           )}
         </div>
       </div>

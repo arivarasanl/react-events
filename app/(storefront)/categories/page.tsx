@@ -2,7 +2,7 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Grid } from "@/components/layout/Grid"
 import { ImageTile } from "@/components/ui/ImageTile"
-import { Typography } from "@/components/ui/Typography"
+import { Subtitle, Title } from "@/components/ui/Typography"
 import Link from "next/link"
 
 const categories = [
@@ -50,9 +50,9 @@ export default function CategoriesPage() {
       <Container>
         {/* Section 1: Page Intro */}
         <div className="max-w-[720px]">
-          <Typography as="h1" variant="display-lg">
+          <Title>
             Categories
-          </Typography>
+          </Title>
         </div>
 
         {/* Section 2: Categories Gallery */}
@@ -62,7 +62,7 @@ export default function CategoriesPage() {
               <Link key={category.id} href={`/categories/${category.id}`} className="block focus:outline-none">
                 <div className="flex flex-col gap-4">
                   <ImageTile src={category.image} alt={category.title} aspect="portrait" />
-                  <Typography variant="subsection">{category.title}</Typography>
+                  <Subtitle>{category.title}</Subtitle>
                 </div>
               </Link>
             ))}

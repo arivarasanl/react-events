@@ -6,7 +6,7 @@ import { fadeRise } from "@/lib/motion/presets"
 
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { Typography } from "@/components/ui/Typography"
+import { Title, Text } from "@/components/ui/Typography"
 import { EditorialCTA } from "@/components/ui/EditorialCTA"
 
 type Props = {
@@ -48,16 +48,13 @@ export default function EditorialFeatureSection({
           className="text-center space-y-8 pt-16"
         >
 
-          <Typography as="h2" variant="display-lg">
+          <Title>
             {title}
-          </Typography>
+          </Title>
 
-          <Typography
-            variant="body-lg"
-            className="text-neutral-600 max-w-xl mx-auto"
-          >
+          <Text className="text-neutral-600 max-w-xl mx-auto">
             {description}
-          </Typography>
+          </Text>
 
           <EditorialCTA href={href}>
             Read the Story

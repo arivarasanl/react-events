@@ -1,7 +1,7 @@
 "use client"
 
 import { Card } from "@/components/ui/Card"
-import { Typography } from "@/components/ui/Typography"
+import { CardTitle, Text, Muted, Caption } from "@/components/ui/Typography"
 import { getImageUrl } from "@/lib/utils/getImageUrl"
 
 interface ProgramCardProps {
@@ -34,29 +34,29 @@ export function ProgramCard({ program }: ProgramCardProps) {
       {/* Content */}
       <div className="p-6">
         {/* Status + Time (small, subtle) */}
-        <Typography variant="caption" className="mb-3">
+        <Caption className="mb-3 block">
           {statusLabel} • {formattedTime}
-        </Typography>
+        </Caption>
 
         {/* Title (primary focus) */}
-        <Typography variant="card" className="mb-3">
+        <CardTitle className="mb-3">
           {program.title}
-        </Typography>
+        </CardTitle>
 
         {/* Speakers (secondary highlight) */}
         {program.speakers?.length > 0 && (
-          <Typography variant="body" className="mb-2">
+          <Text className="mb-2">
             {program.speakers.slice(0, 2).map((s: any) => s.name).join(", ")}
             {program.speakers_count > 2 &&
               ` +${program.speakers_count - 2}`}
-          </Typography>
+          </Text>
         )}
 
         {/* Brand (lowest priority) */}
         {program.brand && (
-          <Typography variant="muted">
+          <Muted>
             {program.brand.name}
-          </Typography>
+          </Muted>
         )}
       </div>
     </Card>

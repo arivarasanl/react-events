@@ -1,6 +1,6 @@
 "use client"
 
-import { ProductCard } from "@/components/commerce/ProductCard"
+import { ProductCard } from "@/features/products/components/card/ProductCard"
 import { RevealOnView } from "@/components/motion/RevealOnView"
 
 import { useProducts } from "@/features/products/context/products"

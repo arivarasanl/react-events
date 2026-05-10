@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
+import { Text, Caption } from "@/components/ui/Typography"
 
 type FilterItem = {
   slug: string
@@ -114,9 +115,9 @@ function FilterSection({
   return (
     <div className="space-y-3">
       {/* Section Title */}
-      <h4 className="text-xs uppercase tracking-wide text-neutral-400">
+      <Caption>
         {title}
-      </h4>
+      </Caption>
 
       {/* Items */}
       <div className="space-y-2">
@@ -138,9 +139,9 @@ function FilterSection({
               />
 
               {/* Text */}
-              <span
+              <Text
                 className={`
-                  text-sm transition
+                  transition
                   ${
                     active
                       ? "text-neutral-900 font-medium"
@@ -149,12 +150,12 @@ function FilterSection({
                 `}
               >
                 {item.name}
-              </span>
+              </Text>
 
               {/* Count */}
-              <span className="text-xs text-neutral-400">
+              <Caption>
                 ({item.count})
-              </span>
+              </Caption>
             </button>
           )
         })}

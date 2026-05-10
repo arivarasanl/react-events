@@ -4,7 +4,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
 import { EditorialGrid } from "@/components/layout/EditorialGrid"
-import { CategoryCard } from "@/components/commerce/CategoryCard"
+import { CategoryCard } from "@/features/categories/components/card/CategoryCard"
 
 export default function CategoriesSection({ items }) {
   return (

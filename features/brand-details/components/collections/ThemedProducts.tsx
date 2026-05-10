@@ -1,7 +1,7 @@
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { SectionTitle } from "@/components/ui/SectionTitle"
-import { ProductCard } from "@/components/commerce/ProductCard"
+import { ProductCard } from "@/features/products/components/card/ProductCard"
 
 export function ThemedProducts({ themes }: any) {
 

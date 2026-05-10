@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { Caption } from "@/components/ui/Typography"
 
 export function RelatedBrands({ brands }: any) {
   if (!brands || brands.length === 0) return null
@@ -14,7 +15,7 @@ export function RelatedBrands({ brands }: any) {
 
         {/* Label */}
         <div className="mb-12 text-center">
-          <span className="type-meta">Discover More Designers</span>
+          <Caption>Discover More Designers</Caption>
         </div>
 
         {/* Grid */}
@@ -46,9 +47,9 @@ export function RelatedBrands({ brands }: any) {
 
                 </div>
 
-                <p className="type-caption mt-4 text-center">
+                <Caption className="mt-4 text-center block">
                   {b.name}
-                </p>
+                </Caption>
 
               </Link>
             </motion.div>

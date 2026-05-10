@@ -1,6 +1,7 @@
 "use client"
 
 import { ReactNode, useState } from "react"
+import { Text } from "@/components/ui/Typography"
 
 type Props = {
   title: string
@@ -32,14 +33,14 @@ export function FilterSection({
         <span>{title}</span>
 
         {/* Chevron */}
-        <span
+        <Text
           className={`
-            text-lg leading-none transition-transform duration-300
+            leading-none transition-transform duration-300
             ${open ? "rotate-180" : "rotate-0"}
           `}
         >
           ⌄
-        </span>
+        </Text>
       </button>
 
       {/* Content */}

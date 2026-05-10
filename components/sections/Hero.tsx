@@ -6,7 +6,7 @@ import { heroZoom, fadeRise } from "@/lib/motion/presets"
 
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
-import { Typography } from "@/components/ui/Typography"
+import { Title, Text, Caption } from "@/components/ui/Typography"
 import { EditorialCTA } from "@/components/ui/EditorialCTA"
 
 const heroImage =
@@ -45,33 +45,22 @@ export function Hero() {
           className="space-y-10 text-center"
         >
           {/* Label */}
-          <Typography
-            as="p"
-            variant="eyebrow"
-            className="tracking-[0.35em]"
-          >
+          <Caption className="tracking-[0.35em] block">
             Virtual Fashion Event 2026
-          </Typography>
+          </Caption>
 
           {/* Headline */}
-          <Typography
-            as="h1"
-            variant="display-xl"
-            className="leading-[1.05]"
-          >
+          <Title className="leading-[1.05]">
             Where Design
             <br />
             Meets Story
-          </Typography>
+          </Title>
 
           {/* Description */}
-          <Typography
-            variant="body-lg"
-            className="max-w-xl mx-auto text-neutral-600"
-          >
+          <Text className="max-w-xl mx-auto text-neutral-600">
             Discover brands, products, and runway programs through a curated
             editorial experience crafted for modern fashion events.
-          </Typography>
+          </Text>
 
           {/* CTAs */}
           <div className="flex justify-center gap-4 pt-4">

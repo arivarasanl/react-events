@@ -8,6 +8,8 @@ type Props = {
   onClose: () => void
 }
 
+import { Subtitle } from "@/components/ui/Typography"
+
 export function MobileFilterModal({ open, onClose }: Props) {
   if (!open) return null
 
@@ -16,7 +18,7 @@ export function MobileFilterModal({ open, onClose }: Props) {
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b">
-        <h2 className="text-lg font-medium">Filters</h2>
+        <Subtitle>Filters</Subtitle>
         <button onClick={onClose}>Close</button>
       </div>
 

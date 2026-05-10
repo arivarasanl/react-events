@@ -1,7 +1,7 @@
 import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
-import { Typography } from "@/components/ui/Typography"
+import { Title, Subtitle, Text, Muted } from "@/components/ui/Typography"
 
 interface Program {
   id: number
@@ -26,14 +26,14 @@ export default function ProgramsSection({ programs }: ProgramsSectionProps) {
 
           {/* Left Sticky Intro */}
           <div className="sticky top-32 self-start">
-            <Typography as="h2" variant="display-lg" className="mb-6">
+            <Title className="mb-6">
               Experience the Program
-            </Typography>
+            </Title>
 
-            <Typography variant="body-lg" className="text-neutral-600">
+            <Text className="text-neutral-600">
               A curated sequence of runway shows, designer talks,
               and collection launches presented throughout the event.
-            </Typography>
+            </Text>
           </div>
 
           {/* Timeline */}
@@ -63,20 +63,20 @@ export default function ProgramsSection({ programs }: ProgramsSectionProps) {
                     " />
 
                     {/* time */}
-                    <p className="text-sm text-neutral-500 mb-1">
+                    <Muted className="mb-1">
                       {day} • {time}
-                    </p>
+                    </Muted>
 
                     {/* title */}
-                    <Typography as="h3" variant="subsection">
+                    <Subtitle>
                       {p.title}
-                    </Typography>
+                    </Subtitle>
 
                     {/* description */}
                     {p.description && (
-                      <p className="text-neutral-600 mt-2 text-sm max-w-md">
+                      <Text className="mt-2 max-w-md">
                         {p.description}
-                      </p>
+                      </Text>
                     )}
 
                   </div>

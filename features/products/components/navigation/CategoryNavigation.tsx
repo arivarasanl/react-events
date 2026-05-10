@@ -18,6 +18,8 @@ type Props = {
   currentSubcategory?: string
 }
 
+import { Muted } from "@/components/ui/Typography"
+
 export function CategoryNavigation({
   categories = [],
   subcategories = [],
@@ -85,9 +87,9 @@ export function CategoryNavigation({
     <div className="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-neutral-200">
 
       {/* Label */}
-      <p className="text-xs uppercase tracking-widest text-neutral-400 mb-4 px-6">
+      <Muted className="uppercase tracking-widest mb-4 px-6">
         Collections
-      </p>
+      </Muted>
 
       <div className="relative flex items-center">
 

@@ -587,3 +587,38 @@ Avoid:
 * simultaneous architecture redesign
 * uncontrolled component expansion
 * replacing stable primitives unnecessarily
+
+# Responsive Architecture
+
+Responsive behavior should preserve compositional hierarchy rather than mechanically compress layouts.
+
+Mobile and tablet layouts should maintain:
+
+* editorial rhythm
+* visual pacing
+* hierarchy clarity
+* imagery importance
+* compositional breathing room
+
+Responsive adaptation should prioritize:
+
+* stacking clarity
+* spacing rhythm
+* readable typography
+* intentional sequencing
+
+Avoid:
+
+* dense mobile compression
+* overly tight spacing
+* collapsing all sections into uniform blocks
+* dashboard-like responsive behavior
+
+Desktop, tablet, and mobile layouts may differ structurally when necessary to preserve editorial quality.
+
+Responsive behavior should remain:
+
+* compositional
+* intentional
+* restrained
+* content-first

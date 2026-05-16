@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { transitionClass, reveal } from "@/styles/design-system/motion"
 
 type Props = {
   children: React.ReactNode
@@ -23,7 +24,7 @@ export function RevealOnView({ children }: Props) {
         }
       },
       {
-        threshold: 0.1,
+        threshold: reveal.css.threshold,
       }
     )
 
@@ -36,7 +37,7 @@ export function RevealOnView({ children }: Props) {
     <div
       ref={ref}
       className={`
-        transform transition-all duration-700 ease-out
+        ${transitionClass.revealCss}
         ${isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-6"}

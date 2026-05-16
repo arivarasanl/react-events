@@ -5,6 +5,11 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Reveal } from "@/components/motion/Reveal"
 import { Title, Text } from "@/components/ui/Typography"
+import {
+  imagePresentationClass,
+  overlayPresentationClass,
+  surfacePresentationClass,
+} from "@/styles/design-system/presentation"
 import Image from "next/image"
 
 export default function RunwayHighlightSection({ item }) {
@@ -13,7 +18,7 @@ export default function RunwayHighlightSection({ item }) {
 
       <Container size="full">
 
-        <div className="relative overflow-hidden rounded-3xl">
+        <div className={`relative ${surfacePresentationClass.imageHero}`}>
 
           <div className="relative aspect-[16/9]">
 
@@ -23,11 +28,11 @@ export default function RunwayHighlightSection({ item }) {
               }
               alt={item.title}
               fill
-              className="object-cover"
+              className={imagePresentationClass.cover}
             />
 
             {/* overlay */}
-            <div className="absolute inset-0 bg-black/30" />
+            <div className={overlayPresentationClass.runwayScrim} />
 
             {/* content */}
             <div className="absolute inset-0 flex items-center justify-center text-center p-10">

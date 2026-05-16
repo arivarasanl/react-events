@@ -1,15 +1,32 @@
 import Link from "next/link"
+import { SectionTitle } from "@/components/ui/Typography"
+import { sectionHeaderSpacingClass } from "@/styles/design-system/spacing"
 
-export default function ExploreBrands({ slug, brands }: any) {
+type Brand = {
+  slug: string
+  name: string
+  image: string
+}
+
+type ExploreBrandsProps = {
+  slug: string
+  brands: Brand[]
+}
+
+export default function ExploreBrands({ slug, brands }: ExploreBrandsProps) {
   return (
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="font-serif text-3xl mb-12">
+        <SectionTitle
+          as="h2"
+          size="section"
+          className={sectionHeaderSpacingClass.toEditorialGrid}
+        >
           Explore by Brand
-        </h2>
+        </SectionTitle>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          {brands.slice(0, 8).map((brand: any) => (
+          {brands.slice(0, 8).map((brand) => (
             <Link
               key={brand.slug}
               href={`/categories/${slug}?brand=${brand.slug}`}
@@ -18,6 +35,7 @@ export default function ExploreBrands({ slug, brands }: any) {
               <div className="overflow-hidden rounded-2xl">
                 <img
                   src={brand.image}
+                  alt={brand.name}
                   className="w-full h-64 object-cover group-hover:scale-105 transition"
                 />
               </div>

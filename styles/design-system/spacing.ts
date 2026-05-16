@@ -94,5 +94,23 @@ export const editorialRhythm = {
   listItem:       "2rem",
 } as const
 
+// ─── Semantic spacing class bridges ──────────────────────────────────────────
+// Tailwind class combinations that recur with the same editorial meaning.
+// These are not layout abstractions; they only name repeated rhythm ownership.
+
+export const cardContentSpacingClass = {
+  /** Image/media → card copy rhythm used by discovery cards. */
+  mediaToCopy: "space-y-4",
+  /** Tight stack for card title, metadata, and value text. */
+  copyStack: "space-y-1",
+} as const
+
+export const sectionHeaderSpacingClass = {
+  /** Section heading → discovery grid rhythm. */
+  toGrid: "mb-14",
+  /** Category-detail section heading → editorial link grid rhythm. */
+  toEditorialGrid: "mb-12",
+} as const
+
 export type SectionSpacingKey   = keyof typeof sectionSpacing
 export type ContainerWidthKey   = keyof typeof containerWidth

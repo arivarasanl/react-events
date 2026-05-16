@@ -8,6 +8,7 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Title, Text, Caption } from "@/components/ui/Typography"
 import { EditorialCTA } from "@/components/ui/EditorialCTA"
+import { imagePresentationClass } from "@/styles/design-system/presentation"
 
 const heroImage =
   "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=2000"
@@ -28,7 +29,7 @@ export function Hero() {
           alt="Crafted Fashion Event"
           fill
           priority
-          className="object-cover"
+          className={imagePresentationClass.cover}
           sizes="100vw"
         />
 

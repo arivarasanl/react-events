@@ -1,7 +1,14 @@
 "use client"
 
+import clsx from "clsx"
 import Link from "next/link"
 import { getImageUrl } from "@/lib/utils/getImageUrl"
+import { Caption, SectionTitle } from "@/components/ui/Typography"
+import {
+  imagePresentationClass,
+  overlayPresentationClass,
+  surfacePresentationClass,
+} from "@/styles/design-system/presentation"
 
 type Brand = {
   name: string
@@ -12,15 +19,18 @@ type Brand = {
   top_products: { image_url?: string }[]
 }
 
-import { CardTitle, Muted } from "@/components/ui/Typography"
-
 export function FeaturedBrandCard({ brand }: { brand: Brand }) {
   const products = brand.top_products || []
   const hasFullCollage = products.length >= 3
 
   return (
     <Link href={`/brands/${brand.slug}`} className="group block">
-      <div className="relative h-[420px] md:h-[460px] w-full overflow-hidden bg-neutral-100 md:rounded-xl">
+      <div
+        className={clsx(
+          "relative h-[420px] md:h-[460px] w-full overflow-hidden md:rounded-xl",
+          surfacePresentationClass.imageNeutral
+        )}
+      >
         
         {/* CASE 1: Full collage */}
         {hasFullCollage && (
@@ -30,7 +40,11 @@ export function FeaturedBrandCard({ brand }: { brand: Brand }) {
                 key={i}
                 src={getImageUrl(p.image_url)}
                 alt={brand.name}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className={clsx(
+                  "h-full w-full",
+                  imagePresentationClass.cover,
+                  imagePresentationClass.hoverZoom
+                )}
               />
             ))}
           </div>
@@ -41,7 +55,11 @@ export function FeaturedBrandCard({ brand }: { brand: Brand }) {
           <img
             src={getImageUrl(brand.banner_url)}
             alt={brand.name}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className={clsx(
+              "h-full w-full",
+              imagePresentationClass.cover,
+              imagePresentationClass.hoverZoom
+            )}
           />
         )}
 
@@ -50,7 +68,11 @@ export function FeaturedBrandCard({ brand }: { brand: Brand }) {
           <img
             src={getImageUrl(products[0].image_url)}
             alt={brand.name}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className={clsx(
+              "h-full w-full",
+              imagePresentationClass.cover,
+              imagePresentationClass.hoverZoom
+            )}
           />
         )}
 
@@ -58,7 +80,12 @@ export function FeaturedBrandCard({ brand }: { brand: Brand }) {
         {!hasFullCollage &&
           !brand.banner_url &&
           !products[0]?.image_url && (
-            <div className="flex h-full items-center justify-center bg-neutral-200">
+            <div
+              className={clsx(
+                "flex h-full items-center justify-center",
+                surfacePresentationClass.imageEmpty
+              )}
+            >
               <span className="text-6xl text-neutral-400">
                 {brand.name.charAt(0)}
               </span>
@@ -66,18 +93,18 @@ export function FeaturedBrandCard({ brand }: { brand: Brand }) {
           )}
 
         {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
+        <div className={overlayPresentationClass.featuredBrandGradient} />
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
           <div className="flex items-end justify-between">
             <div>
-              <CardTitle className="font-medium text-white">
+              <SectionTitle as="h4" size="card" tone="inverse">
                 {brand.name}
-              </CardTitle>
-              <Muted className="text-white/80">
+              </SectionTitle>
+              <Caption variant="plain" tone="inverse">
                 {brand.product_count} products
-              </Muted>
+              </Caption>
             </div>
 
             {brand.logo_url && (

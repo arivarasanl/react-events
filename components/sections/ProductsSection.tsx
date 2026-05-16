@@ -14,7 +14,7 @@ export default function ProductsSection({ items }: ProductsSectionProps) {
     return (
         <Section variant="default">
             <Container size="wide">
-                <SectionTitle className="mb-14">
+                <SectionTitle spacing="toGrid">
                   Collections
                 </SectionTitle>
 
@@ -27,7 +27,6 @@ export default function ProductsSection({ items }: ProductsSectionProps) {
                         image={product.image_url}
                         price={product.price}
                         href={`/products/${product.slug}`}
-                        aspect={(index === 0)||(index === 3)  ? "portrait" : "square"}
                         aspect={"portrait"}
                         className={(index === 0)||(index === 3) ? "md:col-span-2 md:row-span-2" : ""}
                         />

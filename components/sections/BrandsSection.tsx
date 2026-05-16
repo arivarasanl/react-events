@@ -1,4 +1,3 @@
-import { HomepageResponse } from "@/types/homepage"
 import { Section } from "@/components/layout/Section"
 import { SectionTitle } from "@/components/ui/SectionTitle"
 import { Container } from "@/components/layout/Container"
@@ -11,7 +10,7 @@ export default function BrandsSection({ items }) {
     <Section variant="default">
       <Container size="wide">
 
-        <SectionTitle className="mb-14">
+        <SectionTitle spacing="toGrid">
           Featured Designers
         </SectionTitle>
 

@@ -135,6 +135,7 @@ export const reveal = {
    */
   framer: {
     initial:    { opacity: 0, y: 24 },
+    show:       { opacity: 1, y: 0 },
     viewport:   { once: true, margin: "-80px" },
     transition: { duration: 0.6, ease: "easeOut" },
   },
@@ -153,8 +154,28 @@ export const reveal = {
     duration:        "700ms",
     ease:            "cubic-bezier(0, 0, 0.2, 1)", // ease-out
     initialY:        "1.5rem",  // translate-y-6
-    viewportMargin:  "10%",     // IntersectionObserver threshold: 0.1
+    threshold:       0.1,
+    viewportMargin:  "10%",
   },
+} as const
+
+// ─── CSS transition class bridges ────────────────────────────────────────────
+// Stable Tailwind transition rhythms. These preserve existing class strings
+// while centralizing repeated timing/easing behavior.
+
+export const transitionClass = {
+  /** Editorial image hover zoom — explicit ease-out version. */
+  imageTransformEaseOut: "transition-transform duration-700 ease-out",
+  /** Editorial image hover zoom — preserves Tailwind's default transition easing. */
+  imageTransform: "transition-transform duration-700",
+  /** Image tile lift/shadow hover rhythm. */
+  tileLift: "transition-all duration-500 ease-out",
+  /** Image tile hover wash rhythm. */
+  colorWash: "transition-colors duration-500",
+  /** Standard surface border/fade feedback. */
+  surfaceFeedback: "transition duration-300",
+  /** CSS-only scroll reveal rhythm. */
+  revealCss: "transform transition-all duration-700 ease-out",
 } as const
 
 // ─── Inline motion values (not in presets.ts) ─────────────────────────────────

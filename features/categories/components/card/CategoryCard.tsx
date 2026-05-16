@@ -6,6 +6,7 @@ import clsx from "clsx"
 import React from "react"
 
 import { SectionTitle, Caption } from "@/components/ui/Typography"
+import { cardContentSpacingClass } from "@/styles/design-system/spacing"
 
 type CategoryCardProps = {
   title: string
@@ -32,7 +33,7 @@ export function CategoryCard({
       href={href ?? ""}
       className={clsx("group block focus:outline-none", className)}
     >
-      <article className="space-y-4">
+      <article className={cardContentSpacingClass.mediaToCopy}>
 
         <ImageTile
           src={image}
@@ -41,7 +42,7 @@ export function CategoryCard({
           priority={priority}
         />
 
-        <div className="space-y-1">
+        <div className={cardContentSpacingClass.copyStack}>
           {/* size="compact" preserves the original text-base md:text-lg scale exactly */}
           <SectionTitle as="h3" size="compact">{title}</SectionTitle>
 

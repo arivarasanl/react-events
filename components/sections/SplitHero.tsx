@@ -8,6 +8,10 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Title, Subtitle, Text, Muted, Caption } from "@/components/ui/Typography"
 import { EditorialCTA } from "@/components/ui/EditorialCTA"
+import {
+  imagePresentationClass,
+  surfacePresentationClass,
+} from "@/styles/design-system/presentation"
 
 type SplitHeroProps = {
   program?: {
@@ -34,14 +38,14 @@ export function SplitHero({ program }: SplitHeroProps) {
             variants={heroZoom}
             initial="hidden"
             animate="show"
-            className="relative aspect-[4/5] overflow-hidden rounded-3xl"
+            className={`relative aspect-[4/5] ${surfacePresentationClass.imageHero}`}
           >
             <Image
               src={heroImage}
               alt="Crafted Fashion Event"
               fill
               priority
-              className="object-cover"
+              className={imagePresentationClass.cover}
               sizes="50vw"
             />
           </motion.div>

@@ -2,6 +2,12 @@
 
 import Image from "next/image"
 import clsx from "clsx"
+import {
+  imagePresentationClass,
+  overlayPresentationClass,
+  surfacePresentationClass,
+} from "@/styles/design-system/presentation"
+import { transitionClass } from "@/styles/design-system/motion"
 
 const isDev = process.env.NODE_ENV === "development"
 
@@ -31,9 +37,10 @@ export function ImageTile({
   return (
     <div
       className={clsx(
-        "group relative overflow-hidden rounded-2xl",
+        "group relative",
+        surfacePresentationClass.imageTile,
         aspectClass,
-        "transition-all duration-500 ease-out",
+        transitionClass.tileLift,
         "hover:-translate-y-1 hover:shadow-xl"
       )}
     >
@@ -45,22 +52,14 @@ export function ImageTile({
         priority={priority}
         sizes={sizes}
         unoptimized={isDev}
-        className="
-          object-cover
-          transition-transform duration-700 ease-out
-          group-hover:scale-105
-        "
+        className={clsx(
+          imagePresentationClass.cover,
+          imagePresentationClass.hoverZoomEaseOut
+        )}
       />
 
       {/* overlay */}
-      <div
-        className="
-          absolute inset-0
-          bg-black/0
-          transition-colors duration-500
-          group-hover:bg-black/10
-        "
-      />
+      <div className={overlayPresentationClass.tileHoverWash} />
     </div>
   )
 }

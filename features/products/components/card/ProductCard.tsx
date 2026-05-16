@@ -6,6 +6,7 @@ import clsx from "clsx"
 import React from "react"
 
 import { SectionTitle, Body, Meta } from "@/components/ui/Typography"
+import { cardContentSpacingClass } from "@/styles/design-system/spacing"
 
 type ProductCardProps = {
   name: string
@@ -33,7 +34,7 @@ export function ProductCard({
       href={href}
       className={clsx("group block focus:outline-none", className)}
     >
-      <article className="space-y-4">
+      <article className={cardContentSpacingClass.mediaToCopy}>
 
         <ImageTile
           src={image}
@@ -43,7 +44,7 @@ export function ProductCard({
           sizes="(max-width: 768px) 100vw, 33vw"
         />
 
-        <div className="space-y-1">
+        <div className={cardContentSpacingClass.copyStack}>
           {/* Brand identifier — editorial label role, not a caption or helper text */}
           {brand && (
             <Meta>{brand}</Meta>

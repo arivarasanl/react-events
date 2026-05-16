@@ -1,15 +1,32 @@
 import Link from "next/link"
+import { SectionTitle } from "@/components/ui/Typography"
+import { sectionHeaderSpacingClass } from "@/styles/design-system/spacing"
 
-export default function ExploreThemes({ slug, themes }: any) {
+type Theme = {
+  slug: string
+  name: string
+  image: string
+}
+
+type ExploreThemesProps = {
+  slug: string
+  themes: Theme[]
+}
+
+export default function ExploreThemes({ slug, themes }: ExploreThemesProps) {
   return (
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="font-serif text-3xl mb-12">
+        <SectionTitle
+          as="h2"
+          size="section"
+          className={sectionHeaderSpacingClass.toEditorialGrid}
+        >
           Explore by Theme
-        </h2>
+        </SectionTitle>
 
         <div className="grid md:grid-cols-3 gap-12">
-          {themes.slice(0, 5).map((theme: any) => (
+          {themes.slice(0, 5).map((theme) => (
             <Link
               key={theme.slug}
               href={`/categories/${slug}?theme=${theme.slug}`}
@@ -17,6 +34,7 @@ export default function ExploreThemes({ slug, themes }: any) {
             >
               <img
                 src={theme.image}
+                alt={theme.name}
                 className="w-full h-72 object-cover"
               />
               <p className="mt-4 text-lg">

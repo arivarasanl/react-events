@@ -22,7 +22,7 @@ function formatList(values?: string[]) {
   return `${formatted[0]} +${formatted.length - 1} more`
 }
 
-import { Title, Text } from "@/components/ui/Typography"
+import { Body, Headline } from "@/components/ui/Typography"
 
 export function ProductsHeader({ category, brand, theme }: Props) {
   let title = "The Curated Collection"
@@ -48,14 +48,14 @@ export function ProductsHeader({ category, brand, theme }: Props) {
 
   return (
     <div className="max-w-2xl space-y-4 mb-16">
-      <Title className="tracking-tight">
+      <Headline size="title" className="tracking-tight">
         {title}
-      </Title>
+      </Headline>
 
       {description && (
-        <Text>
+        <Body>
           {description}
-        </Text>
+        </Body>
       )}
     </div>
   )

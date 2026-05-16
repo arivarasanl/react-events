@@ -26,7 +26,10 @@
  *   align:  left | center | right
  *
  * SectionTitle additionally supports:
- *   size:   default | compact
+ *   size:   default | compact | card | section
+ *
+ * Caption additionally supports:
+ *   variant: editorial | plain
  */
 
 import React from "react"
@@ -163,9 +166,13 @@ export function Display({ as: Tag = "h1", tone, align, children, className }: Di
 // font-serif · clamp(1.5rem,2.5vw,2.25rem) · leading-[1.2] · tracking-[-0.01em]
 
 const headlineVariants = cva(
-  "font-serif text-[clamp(1.5rem,2.5vw,2.25rem)] leading-[1.2] tracking-[-0.01em]",
+  "font-serif",
   {
     variants: {
+      size: {
+        default: "text-[clamp(1.5rem,2.5vw,2.25rem)] leading-[1.2] tracking-[-0.01em]",
+        title: "text-3xl md:text-4xl leading-snug",
+      },
       tone: {
         default: "text-neutral-900",
         muted:   "text-neutral-500",
@@ -178,6 +185,7 @@ const headlineVariants = cva(
       },
     },
     defaultVariants: {
+      size:  "default",
       tone:  "default",
       align: "left",
     },
@@ -190,9 +198,9 @@ interface HeadlineProps extends VariantProps<typeof headlineVariants> {
   className?: string
 }
 
-export function Headline({ as: Tag = "h2", tone, align, children, className }: HeadlineProps) {
+export function Headline({ as: Tag = "h2", size, tone, align, children, className }: HeadlineProps) {
   return (
-    <Tag className={cn(headlineVariants({ tone, align }), className)}>
+    <Tag className={cn(headlineVariants({ size, tone, align }), className)}>
       {children}
     </Tag>
   )
@@ -204,8 +212,11 @@ export function Headline({ as: Tag = "h2", tone, align, children, className }: H
 //
 // size="default" → font-serif text-2xl md:text-3xl leading-snug
 // size="compact" → font-serif text-base md:text-lg leading-tight tracking-tight
+// size="card"    → font-serif text-xl leading-snug font-medium
+// size="section" → font-serif text-3xl
 //   Compact preserves CategoryCard's existing title scale exactly.
-//   Use only where the editorial context demands a restrained heading size.
+//   Card preserves brand-card title styling without leaking weight/color classes.
+//   Section preserves repeated category section headings.
 
 const sectionTitleVariants = cva(
   "font-serif",
@@ -214,6 +225,8 @@ const sectionTitleVariants = cva(
       size: {
         default: "text-2xl md:text-3xl leading-snug",
         compact: "text-base md:text-lg leading-tight tracking-tight",
+        card: "text-xl leading-snug font-medium",
+        section: "text-3xl",
       },
       tone: {
         default: "text-neutral-900",
@@ -341,13 +354,19 @@ export function Meta({ as: Tag = "span", tone, align, children, className }: Met
 //
 // Supersedes the legacy Caption export.
 // Use for: taglines beneath brand names, category subtitles, image captions.
+// variant="plain" preserves non-uppercase secondary captions such as counts.
 
 const captionVariants = cva(
-  "font-sans text-sm tracking-wide uppercase",
+  "font-sans text-sm",
   {
     variants: {
+      variant: {
+        editorial: "tracking-wide uppercase",
+        plain: "tracking-normal normal-case",
+      },
       tone: {
         default: "text-neutral-400",
+        secondary: "text-neutral-500",
         muted:   "text-neutral-300",
         inverse: "text-white/80",
       },
@@ -358,6 +377,7 @@ const captionVariants = cva(
       },
     },
     defaultVariants: {
+      variant: "editorial",
       tone:  "default",
       align: "left",
     },
@@ -370,9 +390,9 @@ interface CaptionProps extends VariantProps<typeof captionVariants> {
   className?: string
 }
 
-export function Caption({ as: Tag = "span", tone, align, children, className }: CaptionProps) {
+export function Caption({ as: Tag = "span", variant, tone, align, children, className }: CaptionProps) {
   return (
-    <Tag className={cn(captionVariants({ tone, align }), className)}>
+    <Tag className={cn(captionVariants({ variant, tone, align }), className)}>
       {children}
     </Tag>
   )

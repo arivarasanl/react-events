@@ -8,6 +8,7 @@ import { Section } from "@/components/layout/Section"
 import { Container } from "@/components/layout/Container"
 import { Title, Text } from "@/components/ui/Typography"
 import { EditorialCTA } from "@/components/ui/EditorialCTA"
+import { imagePresentationClass } from "@/styles/design-system/presentation"
 
 type Props = {
   title: string
@@ -32,7 +33,7 @@ export default function EditorialFeatureSection({
           src={image}
           alt={title}
           fill
-          className="object-cover"
+          className={imagePresentationClass.cover}
           sizes="100vw"
         />
 

@@ -39,7 +39,7 @@ type Session = {
   media_type?: string
   status?: string
   thumbnail_url?: string
-  speakers?: SessionSpeaker[]
+  speaker_count?: number
 }
 
 type Speaker = {
@@ -130,14 +130,18 @@ function getSessionTypeHighlights(stats: Stats, sessions: Session[]): Highlight[
 // ─────────────────────────────────────────────────────────────────────────────
 
 type PageProps = {
-  params: { slug: string }
+  params: Promise<{
+    slug: string
+  }>
 }
 
 export default async function ProgramDetailsPage({ params }: PageProps) {
+  const { slug } = await params
+
   let data: ProgramResponse
 
   try {
-    data = await getProgram(params.slug)
+    data = await getProgram(slug)
   } catch {
     notFound()
   }
@@ -162,18 +166,23 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
 
   const highlights = getSessionTypeHighlights(stats, sessions)
 
+  const sessionTypes = Object.entries(stats.session_types || {})
+    .filter(([, count]) => count > 0)
+    .map(([type]) => humanizeType(type))
+
   return (
     <>
       {/* ─── Hero ─────────────────────────────────────────────────────────────
           Full-bleed cinematic banner — edge to edge rather than a contained,
           rounded card. Content is overlaid on the same `wide` grid the rest of
           the page uses, so the page reads as one continuous column. */}
+      
       <section className="relative w-full">
         <div
           className={cn(
             "relative w-full overflow-hidden bg-neutral-900",
-            "aspect-[4/5] sm:aspect-[3/2] md:aspect-[2/1] lg:aspect-[21/9]",
-            "min-h-[560px] md:min-h-[600px]"
+            "aspect-[4/5] sm:aspect-[3/2] md:aspect-[16/9] lg:aspect-[18/8]",
+            "min-h-[480px] md:min-h-[560px]"
           )}
         >
           {/* Cover image */}
@@ -212,10 +221,11 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Text overlay */}
-          <div className="absolute inset-x-0 bottom-0 pb-10 md:pb-16 lg:pb-20">
+          {/* Content */}
+          <div className="absolute inset-x-0 bottom-0 pb-10 md:pb-14 lg:pb-16">
             <Container size="wide">
               <div className="flex max-w-3xl flex-col gap-5 md:gap-6">
+
                 {program.brand?.name && (
                   <Meta tone="inverse" className="tracking-[0.25em]">
                     {program.brand.name}
@@ -229,13 +239,13 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
                 {program.description && (
                   <Body
                     tone="inverse"
-                    className="line-clamp-2 max-w-2xl text-base md:text-lg"
+                    className="max-w-2xl text-base md:text-lg"
                   >
                     {program.description}
                   </Body>
                 )}
 
-                {/* Stats — discrete units separated by a dot, not one run-on line */}
+                {/* Stats */}
                 {statParts.length > 0 && (
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                     {statParts.map((part, i) => (
@@ -254,7 +264,27 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
                   </div>
                 )}
 
-                {/* CTA — solid button so the primary action is unmistakable */}
+                {/* Session Types */}
+                {sessionTypes.length > 0 && (
+                  <div className="flex flex-col gap-3 pt-5">
+                    {sessionTypes.map((type) => (
+                      <span
+                        key={type}
+                        className={cn(
+                          "rounded-full",
+                          "border border-white/20",
+                          "px-3 py-1",
+                          "text-xs uppercase tracking-wider",
+                          "text-white/90"
+                        )}
+                      >
+                        {type}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* CTA */}
                 {entryHref && (
                   <Link
                     href={entryHref}
@@ -265,7 +295,10 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
                       "transition-colors duration-200 hover:bg-white/90"
                     )}
                   >
-                    Start Watching
+                    {featured_session
+                      ? `Watch ${featured_session.name}`
+                      : "Watch Program"}
+
                     <span
                       aria-hidden
                       className="transition-transform duration-200 group-hover/cta:translate-x-1"
@@ -284,14 +317,21 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
       {sessions.length > 0 && (
         <Section>
           <Container size="wide">
-            <Headline className="mb-10 md:mb-16">Sessions</Headline>
+
+            <Headline className="mb-8 md:mb-12">
+              Sessions
+            </Headline>
 
             <div
               className={cn(
                 "grid gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-14",
-                sessions.length === 1 && "grid-cols-1",
-                sessions.length >= 2 && sessions.length <= 5 && "grid-cols-1 sm:grid-cols-2",
-                sessions.length >= 6 && "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                sessions.length === 1 &&
+                  "grid-cols-1 justify-items-center",
+                sessions.length >= 2 &&
+                  sessions.length <= 5 &&
+                  "grid-cols-1 sm:grid-cols-2",
+                sessions.length >= 6 &&
+                  "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
               )}
             >
               {sessions.map((session) => (
@@ -303,74 +343,30 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
                 />
               ))}
             </div>
-          </Container>
-        </Section>
-      )}
 
-      {/* ─── Speakers ─────────────────────────────────────────────────────── */}
-      {speakers.length > 0 && (
-        <Section>
-          <Container size="wide">
-            <Headline className="mb-10 md:mb-16">Speakers</Headline>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-12">
-              {speakers.map((speaker) => (
-                <SpeakerCard key={speaker.id} speaker={speaker} />
-              ))}
-            </div>
           </Container>
         </Section>
       )}
 
       {/* ─── About ────────────────────────────────────────────────────────── */}
       {program.description && (
-        <Section>
-          <Container size="wide">
-            <Headline className="mb-10 md:mb-16">About</Headline>
+  <Section>
+    <Container size="wide">
+      <Headline className="mb-8 md:mb-12">
+        About This Program
+      </Headline>
 
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.6fr_1fr] md:gap-16">
-              <div className="max-w-prose">
-                <Body className="text-lg leading-relaxed">{program.description}</Body>
-              </div>
-
-              {/* Highlights — session-type breakdown gives the program shape at a
-                  glance without duplicating the hero's headline stats. */}
-              <aside className="md:border-l md:border-neutral-200 md:pl-12">
-                {highlights.length > 0 && (
-                  <div>
-                    <Meta className="block tracking-[0.2em]">Highlights</Meta>
-                    <dl className="mt-6 divide-y divide-neutral-200">
-                      {highlights.map((h) => (
-                        <div
-                          key={h.label}
-                          className="flex items-baseline justify-between gap-4 py-3.5"
-                        >
-                          <dt className="font-serif text-lg text-neutral-900">
-                            {h.label}
-                          </dt>
-                          <dd className="font-sans text-sm tabular-nums text-neutral-500">
-                            {h.count} {h.count === 1 ? "session" : "sessions"}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                )}
-
-                {program.brand?.name && (
-                  <div className={cn(highlights.length > 0 && "mt-10")}>
-                    <Meta className="block tracking-[0.2em]">Brand</Meta>
-                    <Body className="mt-2 text-neutral-900">{program.brand.name}</Body>
-                  </div>
-                )}
-              </aside>
-            </div>
-          </Container>
-        </Section>
-      )}
+      <div className="max-w-3xl">
+        <Body className="text-lg leading-relaxed">
+          {program.description}
+        </Body>
+      </div>
+    </Container>
+  </Section>
+)}
 
       {/* ─── More From Brand (placeholder) ────────────────────────────────── */}
-      {program.brand?.name && (
+      {/*{program.brand?.name && (
         <Section>
           <Container size="wide">
             <Headline className="mb-10 md:mb-16">
@@ -384,7 +380,7 @@ export default async function ProgramDetailsPage({ params }: PageProps) {
             </div>
           </Container>
         </Section>
-      )}
+      )}*/}
     </>
   )
 }
@@ -411,20 +407,18 @@ function SessionCard({
   const thumbnail = getImageUrl(session.thumbnail_url)
   const isLive = session.status === "live"
 
-  const speakerNames = session.speakers?.map((s) => s.name).join(", ")
-
-  const typeMeta = [session.session_type, session.media_type]
-    .filter(Boolean)
-    .join(" · ")
+  const typeMeta = session.session_type
+    ? humanizeType(session.session_type)
+    : null
 
   return (
     <Link href={href} className="group block">
-      <article className="flex flex-col">
+      <article className={cn( "flex flex-col", isLarge && "max-w-5xl" )} >
         {/* Thumbnail */}
         <div
           className={cn(
             "relative w-full overflow-hidden rounded-2xl bg-neutral-100",
-            isLarge ? "aspect-video" : "aspect-[3/2]"
+            isLarge ? "aspect-[16/9]" : "aspect-[3/2]"
           )}
         >
           <Image
@@ -467,11 +461,14 @@ function SessionCard({
             {session.name}
           </CardHeading>
 
-          {speakerNames && (
-            <p className="line-clamp-1 font-sans text-sm font-medium text-neutral-700">
-              {speakerNames}
-            </p>
-          )}
+          {session.speaker_count ? (
+            <Caption variant="plain" tone="secondary">
+              {session.speaker_count}{" "}
+              {session.speaker_count === 1
+                ? "Speaker"
+                : "Speakers"}
+            </Caption>
+          ) : null}
 
           {/* CTA affordance — makes the card's action explicit on hover */}
           <span
@@ -481,7 +478,7 @@ function SessionCard({
               "transition-colors duration-200 group-hover:text-neutral-900"
             )}
           >
-            Watch
+            Watch Session
             <span
               aria-hidden
               className="transition-transform duration-200 group-hover:translate-x-0.5"

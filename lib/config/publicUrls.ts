@@ -1,4 +1,4 @@
-const PRODUCTION_ORIGIN = "https://api.craftedminds.in"
+const PRODUCTION_ORIGIN = "http://localhost:3000"
 
 function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, "")

@@ -1,4 +1,7 @@
-import type { MediaType, SessionType } from "@/features/sessions/mock/session.mock"
+import type {
+  MediaType,
+  SessionType,
+} from "@/features/sessions/types"
 
 /** Human label for a session type. */
 export function sessionTypeLabel(type: SessionType): string {
@@ -9,13 +12,13 @@ export function sessionTypeLabel(type: SessionType): string {
     panel: "Panel",
     workshop: "Workshop",
   }
+
   return map[type]
 }
 
 /**
  * Human label for a media type — only surfaced when it adds meaning.
- * Returns null for plain on-demand video, where the chip would be noise
- * (we never print "uploaded_video" / "youtube_video" literally).
+ * Returns null for plain on-demand video.
  */
 export function mediaTypeLabel(type: MediaType): string | null {
   const map: Record<MediaType, string | null> = {
@@ -26,5 +29,6 @@ export function mediaTypeLabel(type: MediaType): string | null {
     instagram_post: "Instagram",
     external_link: "External",
   }
+
   return map[type]
 }

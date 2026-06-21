@@ -1,6 +1,8 @@
 import { Headline } from "@/components/ui/Typography"
 import { ProgramCard } from "@/features/programs/components/ProgramCard"
-import type { ProgramCardData } from "@/features/sessions/mock/session.mock"
+import type {
+  ProgramCardData
+} from "@/features/sessions/types"
 
 /**
  * MoreFromBrand — other programs from the same brand. Full-width band below

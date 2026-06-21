@@ -1,15 +1,7 @@
 import { Meta } from "@/components/ui/Typography"
 import { UpNextCard } from "./UpNextCard"
 
-type UpNextSession = {
-  id: number
-  name: string
-  slug: string
-  session_type: string
-  media_type: string
-  status: string
-  thumbnail_url?: string | null
-}
+import type { UpNextSession } from "@/features/sessions/types"
 
 export function UpNext({
   sessions,

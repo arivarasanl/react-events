@@ -3,7 +3,9 @@ import { ChevronLeft } from "lucide-react"
 
 import { Display, Headline, Meta } from "@/components/ui/Typography"
 import { sessionTypeLabel, mediaTypeLabel } from "./labels"
-import type { SessionDetails } from "@/features/sessions/mock/session.mock"
+import type {
+  SessionHeaderData
+} from "@/features/sessions/types"
 
 /**
  * SessionHeader — the textual focal point directly beneath the Stage.

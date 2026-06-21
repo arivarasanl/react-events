@@ -12,7 +12,7 @@ import {
 } from "@/styles/design-system/presentation"
 import Image from "next/image"
 
-export default function RunwayHighlightSection({ item }) {
+export default function FeaturedProgramSection({ item }) {
   return (
     <Section variant="feature">
 
@@ -24,6 +24,7 @@ export default function RunwayHighlightSection({ item }) {
 
             <Image
               src={
+                item.image_url ||
                 "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2000"
               }
               alt={item.title}
@@ -50,8 +51,8 @@ export default function RunwayHighlightSection({ item }) {
                     </Text>
                   )}
 
-                  <EditorialCTA href={`/program/${item.slug}`}>
-                    View Runway
+                  <EditorialCTA href={`/programs/${item.slug}`}>
+                    View Program
                   </EditorialCTA>
 
                 </div>

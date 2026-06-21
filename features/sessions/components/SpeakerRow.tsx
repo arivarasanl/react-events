@@ -2,7 +2,9 @@ import Image from "next/image"
 
 import { getImageUrl } from "@/lib/utils/getImageUrl"
 import { Caption } from "@/components/ui/Typography"
-import type { Speaker } from "@/features/sessions/mock/session.mock"
+import type {
+  Speaker
+} from "@/features/sessions/types"
 
 /**
  * SpeakerRow — compact avatar + name + role, sits high (above the description).

@@ -13,23 +13,10 @@ import { getImageUrl } from "@/lib/utils/getImageUrl"
 import { Caption } from "@/components/ui/Typography"
 import { sessionTypeLabel } from "./labels"
 
-type MediaType =
-  | "image_gallery"
-  | "youtube_video"
-  | "youtube_live"
-  | "instagram_post"
-  | "uploaded_video"
-  | "external_link"
-
-type UpNextSession = {
-  id: number
-  name: string
-  slug: string
-  session_type: string
-  media_type: MediaType
-  status: string
-  thumbnail_url?: string | null
-}
+import type {
+  UpNextSession,
+  MediaType,
+} from "@/features/sessions/types"
 
 function MediaIcon({
   type,

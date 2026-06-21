@@ -6,7 +6,7 @@ import { Play } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { getImageUrl } from "@/lib/utils/getImageUrl"
-import type { Media } from "@/features/sessions/mock/session.mock"
+import type { SessionMedia } from "@/features/sessions/types"
 
 /**
  * Player Stage — youtube_video · youtube_live · uploaded_video.

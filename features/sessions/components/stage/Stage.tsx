@@ -1,4 +1,4 @@
-import type { Media } from "@/features/sessions/mock/session.mock"
+import type { SessionMedia } from "@/features/sessions/types"
 import { PlayerStage } from "./PlayerStage"
 import { GalleryStage } from "./GalleryStage"
 import { InstagramStage } from "./InstagramStage"
@@ -15,19 +15,10 @@ import { GatewayStage } from "./GatewayStage"
  * Everything around the Stage (title, speakers, description, Up Next) is
  * identical across media types — only this region changes.
  */
-export function Stage({ media, title }: { media: Media; title: string }) {
-  switch (media.kind) {
-    case "youtube_video":
-    case "youtube_live":
-    case "uploaded_video":
-      return <PlayerStage media={media} title={title} />
-    case "image_gallery":
-      return <GalleryStage media={media} title={title} />
-    case "instagram_post":
-      return <InstagramStage media={media} title={title} />
-    case "external_link":
-      return <GatewayStage media={media} title={title} />
-    default:
-      return null
-  }
-}
+export function Stage({
+  media,
+  title,
+}: {
+  media: SessionMedia
+  title: string
+})

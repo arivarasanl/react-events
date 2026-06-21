@@ -4,9 +4,22 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "api.craftedminds.in",
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "3000",
         pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "3002",
+         pathname: "/**",
+       },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "3002",
+        pathname: "/rails/active_storage/**",
       },
       {
         protocol: "https",

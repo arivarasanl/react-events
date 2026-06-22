@@ -16,7 +16,7 @@ export default function ExploreSubcategories({
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-6">Explore Subcategories</h2>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {subcategories.map((subcategory) => (
           <Link
             key={subcategory.id}
@@ -32,7 +32,7 @@ export default function ExploreSubcategories({
                 />
               </div>
             )}
-            <div className="p-3">
+            <div className="p-4">
               <h3 className="text-sm font-medium text-gray-900">
                 {subcategory.name}
               </h3>

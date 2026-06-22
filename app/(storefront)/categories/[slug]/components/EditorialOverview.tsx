@@ -1,13 +1,22 @@
+import { Container } from "@/components/layout/Container"
+import { CategoryDetail } from "@/lib/api/categories"
+
 type EditorialOverviewProps = {
-  category: {
-    editorialText: string
-  }
+  category: CategoryDetail
 }
 
 export default function EditorialOverview({ category }: EditorialOverviewProps) {
+  const text = category.editorial?.introduction || category.description
+
+  if (!text) {
+    return null
+  }
+
   return (
-    <div className="max-w-3xl mx-auto px-6 space-y-6 text-neutral-700">
-      <p>{category.editorialText}</p>
-    </div>
+    <Container size="narrow">
+      <div className="prose prose-lg mx-auto text-center text-gray-700">
+        <p>{text}</p>
+      </div>
+    </Container>
   )
 }

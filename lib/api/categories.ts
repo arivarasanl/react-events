@@ -3,7 +3,7 @@ import { API_BASE_URL } from "@/lib/config/publicUrls"
 export type CategorySubcategory = {
   id: number
   name: string
-  slug: string
+  permalink: string
   href: string
 }
 
@@ -12,7 +12,7 @@ export type Category = {
   position: number
 
   name: string
-  slug: string
+  permalink: string
   href: string
 
   description: string
@@ -36,14 +36,14 @@ type RawCategoryMedia = {
 type RawCategorySubcategory = {
   id: number
   name: string
-  slug: string
+  permalink: string
 }
 
 type RawCategory = {
   id: number
   position?: number | null
   name: string
-  slug: string
+  permalink: string
   description?: string | null
   media?: RawCategoryMedia
   subcategories?: RawCategorySubcategory[] | null
@@ -56,8 +56,8 @@ type CategoriesApiResponse = {
   }
 }
 
-function categoryHref(slug: string) {
-  return slug.startsWith("/") ? slug : `/${slug}`
+function categoryHref(permalink: string) {
+  return permalink.startsWith("/") ? permalink : `/${permalink}`
 }
 
 function categoryDescription(category: RawCategory) {
@@ -73,8 +73,8 @@ function transformCategory(category: RawCategory): Category {
     position: category.position ?? 0,
 
     name: category.name,
-    slug: category.slug,
-    href: categoryHref(category.slug),
+    permalink: category.permalink,
+    href: categoryHref(category.permalink),
 
     description: categoryDescription(category),
 
@@ -84,8 +84,8 @@ function transformCategory(category: RawCategory): Category {
       category.subcategories?.map((subcategory) => ({
         id: subcategory.id,
         name: subcategory.name,
-        slug: subcategory.slug,
-        href: categoryHref(subcategory.slug),
+        permalink: subcategory.permalink,
+        href: categoryHref(subcategory.permalink),
       })) ?? [],
   }
 }
@@ -116,4 +116,54 @@ export async function getCategories(): Promise<CategoriesPageData> {
   const data = (await res.json()) as CategoriesApiResponse
 
   return transformCategoriesResponse(data)
+}
+
+export type CategoryDetail = {
+  id: number
+  name: string
+  permalink: string
+  description: string
+
+  media?: {
+    cover_image?: {
+      url: string
+    }
+  }
+
+  editorial?: {
+    introduction?: string
+  }
+
+  explore: {
+    subcategories: {
+      id: number
+      name: string
+      permalink: string
+    }[]
+
+    themes: any[]
+    occasions: any[]
+    brands: any[]
+  }
+
+  refine: {
+    enabled: boolean
+  }
+}
+
+export async function getCategoryBySlug(
+  slug: string
+): Promise<CategoryDetail | null> {
+  const res = await fetch(
+    `${API_BASE_URL}/api/v2/storefront/categories/${slug}.json`,
+    {
+      next: { revalidate: 60 },
+    }
+  )
+
+  if (!res.ok) {
+    return null
+  }
+
+  return res.json()
 }

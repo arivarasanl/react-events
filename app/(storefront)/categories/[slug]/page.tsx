@@ -28,11 +28,6 @@ export default async function CategoryPage({ params }: PageProps) {
     return notFound()
   }
 
-  const [themes, brands] = await Promise.all([
-    getThemesByCategory(slug),
-    getBrandsByCategory(slug),
-  ])
-
   return (
     <main>
       {/* 1. Hero */}
@@ -46,7 +41,7 @@ export default async function CategoryPage({ params }: PageProps) {
       {/* 3. Explore by Theme */}
       <PageSection rhythm="editorial">
         <Container size="wide">
-          <ExploreThemes slug={slug} themes={themes} />
+          <ExploreSubcategories subcategories={category.explore.subcategories} />
         </Container>
       </PageSection>
 

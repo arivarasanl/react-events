@@ -35,35 +35,36 @@ export function DesignerSpotlight() {
   }
 
   return (
-    <div className="mb-16 space-y-6">
+    <nav className="mb-16" aria-label="Featured designers">
 
-      <h3 className="text-xs uppercase tracking-widest text-neutral-400">
-        Designer Spotlight
-      </h3>
-
-      <div className="flex flex-wrap gap-4">
-        {designers.map((designer) => {
+      <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3">
+        {designers.map((designer, index) => {
           const isActive = activeBrands.includes(designer.slug)
 
           return (
-            <button
-              key={designer.slug}
-              onClick={() => handleSelect(designer.slug)}
-              className={`
-                px-4 py-2
-                border text-sm
-                transition-all duration-200
-                ${isActive
-                  ? "border-black text-black font-medium"
-                  : "border-neutral-200 text-neutral-600 hover:border-black hover:text-black"
-                }
-              `}
-            >
-              {designer.name}
-            </button>
+            <span key={designer.slug} className="inline-flex items-baseline gap-6">
+              <button
+                onClick={() => handleSelect(designer.slug)}
+                className={`
+                  text-lg lg:text-xl tracking-wide
+                  transition-all duration-200
+                  ${isActive
+                    ? "text-black underline underline-offset-8 decoration-1"
+                    : "text-neutral-400 hover:text-black"
+                  }
+                `}
+              >
+                {designer.name}
+              </button>
+              {index < designers.length - 1 && (
+                <span className="text-neutral-200 select-none" aria-hidden="true">
+                  /
+                </span>
+              )}
+            </span>
           )
         })}
       </div>
-    </div>
+    </nav>
   )
 }

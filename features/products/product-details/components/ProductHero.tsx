@@ -1,12 +1,24 @@
 import { ProductGallery } from "./gallery/ProductGallery"
 import { ProductInfo } from "./ProductInfo"
 
+type Theme = {
+  name: string
+  slug: string
+}
+
+type Occasion = {
+  name: string
+  slug: string
+}
+
 type Props = {
   product: any
   gallery: string[]
   options: any[]
   variants: any[]
   variantIndex: Record<string, any>
+  themes?: Theme[]
+  occasions?: Occasion[]
 }
 
 export function ProductHero({
@@ -15,6 +27,8 @@ export function ProductHero({
   options,
   variants,
   variantIndex,
+  themes = [],
+  occasions = [],
 }: Props) {
 
   return (
@@ -27,6 +41,8 @@ export function ProductHero({
         options={options}
         variants={variants}
         variantIndex={variantIndex}
+        themes={themes}
+        occasions={occasions}
       />
 
     </div>

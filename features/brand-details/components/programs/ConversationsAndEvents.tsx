@@ -1,4 +1,4 @@
-import { Caption, Body, Headline } from "@/components/ui/Typography"
+import { Caption, Body } from "@/components/ui/Typography"
 import Link from "next/link"
 
 type Program = {
@@ -16,13 +16,13 @@ type Props = {
 
 export function ConversationsAndEvents({ programs }: Props) {
   return (
-    <section className="py-16 px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto space-y-10">
+    <section className="px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto space-y-12">
         <Caption className="uppercase tracking-widest text-neutral-400">
           Conversations &amp; Events
         </Caption>
 
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-12 md:grid-cols-2">
           {programs.map((program) => (
             <ProgramCard key={program.id} program={program} />
           ))}
@@ -50,21 +50,21 @@ function ProgramCard({ program }: { program: Program }) {
   const href = program.slug ? `/programs/${program.slug}` : "#"
 
   return (
-    <div className="space-y-4 border border-neutral-100 rounded-lg p-6">
-      <Headline size="sm" className="tracking-tight">
+    <div className="space-y-5 border border-neutral-100 rounded-lg p-8">
+      <h3 className="text-lg md:text-xl font-medium tracking-tight text-neutral-900">
         {program.name}
-      </Headline>
+      </h3>
+
+      {stats.length > 0 && (
+        <p className="text-xs uppercase tracking-wider text-neutral-400">
+          {stats.join(" · ")}
+        </p>
+      )}
 
       {program.description && (
         <Body className="text-neutral-600 line-clamp-3">
           {program.description}
         </Body>
-      )}
-
-      {stats.length > 0 && (
-        <p className="text-xs text-neutral-400">
-          {stats.join(" · ")}
-        </p>
       )}
 
       <Link

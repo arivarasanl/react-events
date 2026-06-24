@@ -1,4 +1,4 @@
-import { Caption, Body } from "@/components/ui/Typography"
+import { Caption } from "@/components/ui/Typography"
 
 type Props = {
   description: string
@@ -6,15 +6,15 @@ type Props = {
 
 export function AboutTheMaison({ description }: Props) {
   return (
-    <section className="py-16 px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto space-y-6">
+    <section className="px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto space-y-8">
         <Caption className="uppercase tracking-widest text-neutral-400">
           About the Maison
         </Caption>
 
-        <Body className="text-neutral-700 leading-relaxed whitespace-pre-line">
+        <p className="text-base md:text-lg text-neutral-700 leading-[1.85] whitespace-pre-line">
           {description}
-        </Body>
+        </p>
       </div>
     </section>
   )

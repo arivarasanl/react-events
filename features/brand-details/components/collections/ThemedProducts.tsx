@@ -1,4 +1,3 @@
-import { Headline } from "@/components/ui/Typography"
 import { ProductCard } from "@/features/products/components/card/ProductCard"
 
 type Product = {
@@ -21,13 +20,13 @@ type Props = {
 
 export function ThemedProducts({ themes }: Props) {
   return (
-    <section className="py-16 px-6 lg:px-8 space-y-16">
+    <section className="px-6 lg:px-8 space-y-20">
       {themes.map((theme) => (
-        <div key={theme.theme} className="space-y-6">
+        <div key={theme.theme} className="space-y-8">
 
-          <Headline size="sm" className="tracking-tight">
+          <span className="block text-xs uppercase tracking-widest text-neutral-400">
             {theme.theme}
-          </Headline>
+          </span>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {theme.products.map((product) => (

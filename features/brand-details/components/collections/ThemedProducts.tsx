@@ -19,30 +19,37 @@ type Props = {
 }
 
 export function ThemedProducts({ themes }: Props) {
+  const featuredTheme = themes[0]
+
+  if (!featuredTheme || featuredTheme.products.length === 0) {
+    return null
+  }
+
   return (
-    <section className="px-6 lg:px-8 space-y-20">
-      {themes.map((theme) => (
-        <div key={theme.theme} className="space-y-8">
+    <section className="max-w-7xl mx-auto px-6 py-24">
 
-          <span className="block text-xs uppercase tracking-widest text-neutral-400">
-            {theme.theme}
-          </span>
+      <div className="mb-10">
+        <span className="block text-xs uppercase tracking-widest text-neutral-400 mb-3">
+          Collection
+        </span>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {theme.products.map((product) => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                image={product.image_url || "/images/placeholder.png"}
-                price={product.price}
-                href={`/products/${product.slug}`}
-                aspect="portrait"
-              />
-            ))}
-          </div>
+        <h2 className="text-3xl md:text-4xl font-light tracking-tight text-black">
+          {featuredTheme.theme}
+        </h2>
+      </div>
 
-        </div>
-      ))}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {featuredTheme.products.slice(0, 4).map((product) => (
+            <ProductCard
+              key={product.id}
+              name={product.name}
+              image={product.image_url}
+              price={product.price}
+              href={`/products/${product.slug}`}
+            />
+        ))}
+      </div>
+
     </section>
   )
 }

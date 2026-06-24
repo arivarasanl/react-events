@@ -24,42 +24,30 @@ export function BrandDetailsLayout({ data }: any) {
 
       {/* ABOUT THE MAISON */}
       {brand?.description && (
-        <div className="pt-20 pb-24">
-          <AboutTheMaison description={brand.description} />
-        </div>
+        <AboutTheMaison description={brand.description} />
       )}
 
       {/* SIGNATURE LOOKS */}
       {featured_products.length >= 3 && (
-        <div className="py-24">
-          <SignatureLooks products={featured_products} />
-        </div>
+        <SignatureLooks products={featured_products} />
       )}
 
       {/* COLLECTIONS (use themed_products) */}
       {themed_products.length > 0 && (
-        <div className="py-24">
-          <ThemedProducts themes={themed_products} />
-        </div>
+        <ThemedProducts themes={themed_products} />
       )}
 
       {/* CONVERSATIONS & EVENTS */}
       {programs.length > 0 && (
-        <div className="py-24">
-          <ConversationsAndEvents programs={programs} />
-        </div>
+        <ConversationsAndEvents programs={programs} />
       )}
 
       {/* FROM THE ATELIER */}
-      <div className="py-24">
-        <FromTheAtelier brand={brand} messages={messages} />
-      </div>
+      <FromTheAtelier brand={brand} messages={messages} />
 
       {/* RELATED (use explore_brands) */}
       {explore_brands.length > 0 && (
-        <div className="pt-28 pb-20">
-          <DesignerCarousel items={explore_brands} />
-        </div>
+        <DesignerCarousel items={explore_brands} />
       )}
     </>
   )

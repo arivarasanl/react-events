@@ -1,7 +1,6 @@
 import { BrandHero } from "@/features/brand-details/components/hero/BrandHero"
 import { SignatureLooks } from "@/features/brand-details/components/looks/SignatureLooks"
 import { AboutTheMaison } from "@/features/brand-details/components/about/AboutTheMaison"
-import { ThemedProducts } from "@/features/brand-details/components/collections/ThemedProducts"
 import { ConversationsAndEvents } from "@/features/brand-details/components/programs/ConversationsAndEvents"
 import { FromTheAtelier } from "@/features/brand-details/components/connect/FromTheAtelier"
 import DesignerCarousel from "@/components/sections/DesignerCarousel"
@@ -24,30 +23,35 @@ export function BrandDetailsLayout({ data }: any) {
 
       {/* ABOUT THE MAISON */}
       {brand?.description && (
-        <AboutTheMaison description={brand.description} />
+        <div className="pt-24 pb-28">
+          <AboutTheMaison description={brand.description} />
+        </div>
       )}
 
       {/* SIGNATURE LOOKS */}
       {featured_products.length >= 3 && (
-        <SignatureLooks products={featured_products} />
-      )}
-
-      {/* COLLECTIONS (use themed_products) */}
-      {themed_products.length > 0 && (
-        <ThemedProducts themes={themed_products} />
+        <div className="py-28">
+          <SignatureLooks products={featured_products} />
+        </div>
       )}
 
       {/* CONVERSATIONS & EVENTS */}
       {programs.length > 0 && (
-        <ConversationsAndEvents programs={programs} />
+        <div className="py-28">
+          <ConversationsAndEvents programs={programs} />
+        </div>
       )}
 
       {/* FROM THE ATELIER */}
-      <FromTheAtelier brand={brand} messages={messages} />
+      <div className="py-28">
+        <FromTheAtelier brand={brand} messages={messages} />
+      </div>
 
-      {/* RELATED (use explore_brands) */}
+      {/* DISCOVER MORE DESIGNERS */}
       {explore_brands.length > 0 && (
-        <DesignerCarousel items={explore_brands} />
+        <div className="pt-32 pb-24">
+          <DesignerCarousel items={explore_brands} />
+        </div>
       )}
     </>
   )

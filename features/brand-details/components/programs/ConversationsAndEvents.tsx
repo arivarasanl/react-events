@@ -15,64 +15,58 @@ type Props = {
 }
 
 export function ConversationsAndEvents({ programs }: Props) {
+  const featured = programs[0]
+
+  if (!featured) return null
+
+  const stats: string[] = []
+
+  if (featured.sessions_count && featured.sessions_count > 0) {
+    stats.push(
+      `${featured.sessions_count} session${featured.sessions_count > 1 ? "s" : ""}`
+    )
+  }
+
+  if (featured.speakers_count && featured.speakers_count > 0) {
+    stats.push(
+      `${featured.speakers_count} speaker${featured.speakers_count > 1 ? "s" : ""}`
+    )
+  }
+
+  const href = featured.slug ? `/programs/${featured.slug}` : "#"
+
   return (
     <section className="px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto space-y-12">
+      <div className="max-w-3xl mx-auto space-y-10">
         <Caption className="uppercase tracking-widest text-neutral-400">
           Conversations &amp; Events
         </Caption>
 
-        <div className="grid gap-12 md:grid-cols-2">
-          {programs.map((program) => (
-            <ProgramCard key={program.id} program={program} />
-          ))}
+        <div className="space-y-6">
+          <h3 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-900">
+            {featured.name}
+          </h3>
+
+          {stats.length > 0 && (
+            <p className="text-xs uppercase tracking-wider text-neutral-400">
+              {stats.join(" · ")}
+            </p>
+          )}
+
+          {featured.description && (
+            <Body className="text-neutral-600 leading-relaxed">
+              {featured.description}
+            </Body>
+          )}
+
+          <Link
+            href={href}
+            className="inline-block text-sm text-neutral-900 underline underline-offset-4 hover:text-neutral-600 transition"
+          >
+            Explore Program
+          </Link>
         </div>
       </div>
     </section>
-  )
-}
-
-function ProgramCard({ program }: { program: Program }) {
-  const stats: string[] = []
-
-  if (program.sessions_count && program.sessions_count > 0) {
-    stats.push(
-      `${program.sessions_count} session${program.sessions_count > 1 ? "s" : ""}`
-    )
-  }
-
-  if (program.speakers_count && program.speakers_count > 0) {
-    stats.push(
-      `${program.speakers_count} speaker${program.speakers_count > 1 ? "s" : ""}`
-    )
-  }
-
-  const href = program.slug ? `/programs/${program.slug}` : "#"
-
-  return (
-    <div className="space-y-5 border border-neutral-100 rounded-lg p-8">
-      <h3 className="text-lg md:text-xl font-medium tracking-tight text-neutral-900">
-        {program.name}
-      </h3>
-
-      {stats.length > 0 && (
-        <p className="text-xs uppercase tracking-wider text-neutral-400">
-          {stats.join(" · ")}
-        </p>
-      )}
-
-      {program.description && (
-        <Body className="text-neutral-600 line-clamp-3">
-          {program.description}
-        </Body>
-      )}
-
-      <Link
-        href={href}
-        className="inline-block text-sm text-neutral-900 underline underline-offset-4 hover:text-neutral-600 transition"
-      >
-        Explore Program
-      </Link>
-    </div>
   )
 }

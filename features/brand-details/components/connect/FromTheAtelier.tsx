@@ -22,19 +22,21 @@ type Props = {
 
 export function FromTheAtelier({ brand, messages = [] }: Props) {
   const featured = messages[0]
-  const messageText = featured?.text || featured?.body || null
+  const additional = messages.slice(1)
+  const featuredText = featured?.text || featured?.body || null
 
   return (
-    <section className="py-16 px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto space-y-8">
+    <section className="px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto space-y-12">
         <Caption className="uppercase tracking-widest text-neutral-400">
           From the Atelier
         </Caption>
 
-        {messageText && (
-          <blockquote className="space-y-4">
-            <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-800 italic">
-              &ldquo;{messageText}&rdquo;
+        {/* Featured quote */}
+        {featuredText && (
+          <blockquote className="space-y-5">
+            <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-neutral-800 italic">
+              &ldquo;{featuredText}&rdquo;
             </p>
 
             {featured?.title && (
@@ -45,7 +47,32 @@ export function FromTheAtelier({ brand, messages = [] }: Props) {
           </blockquote>
         )}
 
-        {!messageText && (
+        {/* Additional messages */}
+        {additional.length > 0 && (
+          <div className="space-y-10 pt-4 border-t border-neutral-100">
+            {additional.map((message, index) => {
+              const text = message.text || message.body
+              if (!text) return null
+
+              return (
+                <div key={message.id || index} className="space-y-3">
+                  <Body className="text-neutral-700 leading-relaxed">
+                    {text}
+                  </Body>
+
+                  {message.title && (
+                    <p className="text-xs text-neutral-400">
+                      — {message.title}
+                    </p>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
+
+        {/* Fallback when no messages */}
+        {!featuredText && additional.length === 0 && (
           <Body className="text-neutral-600">
             Start a conversation with {brand.name}.
           </Body>

@@ -4,7 +4,7 @@ import { useState } from "react"
 import { BrandsGrid } from "../grid/BrandsGrid"
 import { BrandsFilters } from "../filters/BrandsFilters"
 import { BrandsNavigation } from "../navigation/BrandsNavigation"
-import { BrandsToolbar } from "../toolbar/BrandsToolbar"
+import { BrandsSortDropdown } from "../toolbar/BrandsSortDropdown"
 import { FeaturedBrandCard } from "../grid/FeaturedBrandCard"
 import { ActiveFiltersBar } from "../filters/ActiveFiltersBar"
 import { Title, Muted, Caption } from "@/components/ui/Typography"
@@ -16,8 +16,9 @@ type BrandsLayoutProps = {
 export function BrandsLayout({ data }: BrandsLayoutProps) {
   const [showFilters, setShowFilters] = useState(true)
 
-  const featured = data.brands?.[0]
-  const rest = data.brands || []
+  const brands = data.brands || []
+  const featuredBrand = brands[0]
+  const remainingBrands = brands.slice(1)
 
   return (
     <div className="space-y-12">
@@ -33,29 +34,16 @@ export function BrandsLayout({ data }: BrandsLayoutProps) {
             Curated designers redefining modern luxury.
           </Muted>
         </div>
-
-        {/* Toolbar */}
-        <BrandsToolbar
-          sorting={data.sorting}
-          rightSlot={
-            <button
-              onClick={() => setShowFilters((v) => !v)}
-              className="text-sm text-neutral-500 hover:text-neutral-900 transition"
-            >
-              {showFilters ? "Hide Filters" : "Show Filters"}
-            </button>
-          }
-        />
       </div>
 
       {/* Featured */}
-      {featured && (
+      {featuredBrand && (
         <section className="space-y-4">
           <Caption>Featured</Caption>
 
           <div className="-mx-4 md:-mx-6">
             <div className="max-w-6xl mx-auto">
-              <FeaturedBrandCard brand={featured} />
+              <FeaturedBrandCard brand={featuredBrand} />
             </div>
           </div>
         </section>
@@ -75,24 +63,27 @@ export function BrandsLayout({ data }: BrandsLayoutProps) {
 
         {/* Grid Area */}
         <main className="flex-1 min-w-0 space-y-6">
-          {/* Header Row */}
+          {/* Section Header */}
           <div className="flex items-center justify-between">
             <Caption>All Brands</Caption>
 
-            {/* Toggle */}
-            <button
-              onClick={() => setShowFilters((v) => !v)}
-              className="text-sm text-neutral-500 hover:text-neutral-900 transition"
-            >
-              {showFilters ? "Hide Filters" : "Show Filters"}
-            </button>
+            <div className="flex items-center gap-4">
+              <BrandsSortDropdown sorting={data.sorting} />
+
+              <button
+                onClick={() => setShowFilters((v) => !v)}
+                className="text-sm text-neutral-500 hover:text-neutral-900 transition"
+              >
+                {showFilters ? "Hide Filters" : "Show Filters"}
+              </button>
+            </div>
           </div>
 
           {/* Active Filters */}
           <ActiveFiltersBar />
 
           {/* Grid */}
-          <BrandsGrid brands={rest} />
+          <BrandsGrid brands={remainingBrands} />
         </main>
       </div>
     </div>

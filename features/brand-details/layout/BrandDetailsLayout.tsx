@@ -35,17 +35,17 @@ export function BrandDetailsLayout({ data }: any) {
         </div>
       )}
 
+      {/* FROM THE ATELIER */}
+      <div className="py-28">
+        <FromTheAtelier brand={brand} messages={messages} />
+      </div>
+
       {/* CONVERSATIONS & EVENTS */}
       {programs.length > 0 && (
         <div className="py-28">
           <ConversationsAndEvents programs={programs} />
         </div>
       )}
-
-      {/* FROM THE ATELIER */}
-      <div className="py-28">
-        <FromTheAtelier brand={brand} messages={messages} />
-      </div>
 
       {/* DISCOVER MORE DESIGNERS */}
       {explore_brands.length > 0 && (

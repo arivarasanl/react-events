@@ -10,15 +10,15 @@ export function EditorialCTA({ href, children }: EditorialCTAProps) {
     <Link
       href={href}
       className="
-      inline-block
-      border border-current
-      px-6 py-3
-      text-sm
-      tracking-widest
-      uppercase
-      transition
-      hover:bg-black
-      hover:text-white
+        inline-block
+        border border-current
+        px-6 py-3
+        text-sm
+        tracking-widest
+        uppercase
+        transition
+        hover:bg-black
+        hover:text-white
       "
     >
       {children}

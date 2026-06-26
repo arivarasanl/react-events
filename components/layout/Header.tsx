@@ -4,15 +4,17 @@ import Link from "next/link"
 import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
+import { ProfileDropdown } from "@/components/layout/ProfileDropdown"
+import { MobileNavOverlay } from "@/components/layout/MobileNavOverlay"
 
 const leftNav = [
+  { label: "Categories", href: "/categories" },
   { label: "Brands", href: "/brands" },
-  { label: "Products", href: "/products" },
 ]
 
 const rightNav = [
+  { label: "Products", href: "/products" },
   { label: "Programs", href: "/programs" },
-  { label: "Profile", href: "/profile" },
 ]
 
 export function Header({ brandName }: { brandName?: string }) {
@@ -20,6 +22,7 @@ export function Header({ brandName }: { brandName?: string }) {
 
   const [scrolled, setScrolled] = useState(false)
   const [showBrand, setShowBrand] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -47,6 +50,11 @@ export function Header({ brandName }: { brandName?: string }) {
     return () => observer.disconnect()
   }, [brandName])
 
+  // Close mobile nav on route change
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
   const navLink = (item: { label: string; href: string }) => {
     const active = pathname.startsWith(item.href)
 
@@ -65,50 +73,94 @@ export function Header({ brandName }: { brandName?: string }) {
   }
 
   return (
-    <header
-      className={clsx(
-        "sticky top-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white/80 backdrop-blur-xl border-b border-neutral-200"
-          : "bg-white/60 backdrop-blur-lg"
-      )}
-    >
-      <div
+    <>
+      <header
         className={clsx(
-          "max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 grid grid-cols-3 items-center transition-all duration-300",
-          scrolled ? "h-16" : "h-20"
+          "sticky top-0 z-50 transition-all duration-300",
+          scrolled
+            ? "bg-white/80 backdrop-blur-xl border-b border-neutral-200"
+            : "bg-white/60 backdrop-blur-lg"
         )}
       >
-        {/* Left */}
-        <nav className="flex items-center gap-8 text-sm tracking-wide">
-          {leftNav.map(navLink)}
-        </nav>
-
-        {/* Center */}
-        <div className="flex justify-center">
-          {showBrand && brandName ? (
-            <span className="text-xs tracking-[0.3em] uppercase text-neutral-700">
-              {brandName}
-            </span>
-          ) : (
-            <Link
-              href="/"
-              className={clsx(
-                "font-serif tracking-[0.25em]",
-                scrolled ? "text-lg" : "text-xl md:text-2xl"
-              )}
-            >
-              CRAFTED
-            </Link>
+        {/* Desktop */}
+        <div
+          className={clsx(
+            "max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 hidden lg:grid grid-cols-3 items-center transition-all duration-300",
+            scrolled ? "h-16" : "h-20"
           )}
+        >
+          {/* Left */}
+          <nav className="flex items-center gap-8 text-sm tracking-wide">
+            {leftNav.map(navLink)}
+          </nav>
+
+          {/* Center */}
+          <div className="flex justify-center">
+            {showBrand && brandName ? (
+              <span className="text-xs tracking-[0.3em] uppercase text-neutral-700">
+                {brandName}
+              </span>
+            ) : (
+              <Link
+                href="/"
+                className={clsx(
+                  "font-serif tracking-[0.25em]",
+                  scrolled ? "text-lg" : "text-xl md:text-2xl"
+                )}
+              >
+                CRAFTED
+              </Link>
+            )}
+          </div>
+
+          {/* Right */}
+          <nav className="flex items-center justify-end gap-8 text-sm tracking-wide">
+            {rightNav.map(navLink)}
+            <ProfileDropdown />
+          </nav>
         </div>
 
-        {/* Right */}
-        <nav className="flex items-center justify-end gap-8 text-sm tracking-wide">
-          {rightNav.map(navLink)}
-        </nav>
+        {/* Mobile */}
+        <div
+          className={clsx(
+            "lg:hidden flex items-center justify-between px-6 transition-all duration-300",
+            scrolled ? "h-16" : "h-20"
+          )}
+        >
+          {/* Menu trigger */}
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="text-sm tracking-wide text-neutral-700 hover:text-black transition-colors"
+          >
+            Menu
+          </button>
 
-      </div>
-    </header>
+          {/* Center logo */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            {showBrand && brandName ? (
+              <span className="text-xs tracking-[0.3em] uppercase text-neutral-700">
+                {brandName}
+              </span>
+            ) : (
+              <Link
+                href="/"
+                className={clsx(
+                  "font-serif tracking-[0.25em]",
+                  scrolled ? "text-lg" : "text-xl"
+                )}
+              >
+                CRAFTED
+              </Link>
+            )}
+          </div>
+
+          {/* Profile icon (mobile) */}
+          <ProfileDropdown />
+        </div>
+      </header>
+
+      {/* Mobile overlay */}
+      <MobileNavOverlay open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </>
   )
 }

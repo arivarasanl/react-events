@@ -63,7 +63,7 @@ export function ProgramSpotlight({
         {/* Section Label */}
 
         <Caption className="uppercase tracking-[0.18em] text-neutral-400 mb-10">
-          {title}
+          {program.name}
         </Caption>
 
         <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-12 lg:gap-20 items-center">
